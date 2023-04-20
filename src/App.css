@@ -1,38 +1,256 @@
-.App {
-  text-align: center;
+* {
+  font-family: sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  position: sticky;
+  top: 0px;
+  z-index: 1100;
+  background-color: rgba(249, 250, 251, 0.8);
+
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.header-item {
+
+  margin-left: 1.5rem;
+  margin-top: 1.5rem;
+  gap: 2rem;
+
+  border: 0px;
+  border-radius: 50%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header-item:hover {
+  color: #dfdfdf;
+
+}
+
+.header-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1.5rem;
+  gap: 5px;
+
+}
+
+
+.nav-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-item {
+  margin-left: 3rem;
+}
+
+.nav-icon>button {
+  margin-right: 3rem;
+  text-transform: capitalize !important;
+  font-weight: 800;
+}
+
+.search-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-item {
+  margin-left: 3rem;
+  position: relative;
+}
+
+.searchbar {
+  position: absolute;
+
+  height: 100% !important;
+  right: 10px;
+}
+
+.search-icon {
+  margin-right: 3rem;
+}
+
+/* card */
+
+.cardmap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.main-div {
+  /* border: 2px solid; */
+  width: 19rem;
+  border-radius: 10%;
+  box-shadow: rgba(145, 158, 171, 0.2) 0px 0px 2px 0px,
+    rgba(145, 158, 171, 0.12)0px 12px 24px -4px;
+  margin: 2rem;
+  min-height: 24rem;
+}
+
+.card {
+  /* border: 2px solid red; */
+  width: 100%;
+  position: relative;
+  border-radius: 20px
+}
+
+.img-div {
+  width: 100%;
+  left: 2rem;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+
+}
+
+.main-img {
+  width: 100%;
+  right: 2rem;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.img-div span {
+  position: absolute;
+  top: 11.2rem;
+  background-color: white;
+  border-radius: 50%;
+  left: 1.8rem;
+}
+
+.shape-div {
+  position: relative;
+  right: 130%;
+  width: 100%;
+}
+
+.shape-avatar {
+
+  position: absolute;
+  width: 95px;
+  height: 44px;
+  left: 23px;
+  top: -3px;
+
+}
+
+.content-div {
   display: flex;
   flex-direction: column;
+  gap: 2rem;
+}
+
+.date-prod {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+}
+
+.Dates {
+  margin-left: 1rem;
+  margin-top: 2rem;
+  font-weight: 400;
+  color: #747474;
+  font-size: 0.75rem;
+}
+
+.prod-name {
+  margin-left: 1rem;
+  font-weight: 600;
+}
+
+.social-media {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin: 1rem 00.2rem;
+  color: #919eab;
+  gap: 0.5rem;
+  font-size: 12px;
+  margin-right: 1rem;
+}
+
+.chat {
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 0.2rem;
+
 }
 
-.App-link {
-  color: #61dafb;
+.visibility {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.share {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+
+@media screen and (max-width: 560px) {
+  .nav-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
-  to {
-    transform: rotate(360deg);
+
+  .nav-item {
+    margin-left: 1rem;
+  }
+
+  .nav-icon>button {
+    margin-left: 1rem;
+    text-transform: capitalize !important;
+    font-weight: 800;
+  }
+
+  /* search item  */
+
+  .search-div {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+
+  }
+
+  .search-item {
+    margin-left: 1rem;
+    position: relative;
+
+  }
+
+  .search-icon {
+    margin-right: 0.5rem;
+
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .cardmap {
+    display: flex;
+
   }
 }
