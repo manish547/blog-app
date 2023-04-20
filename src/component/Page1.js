@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Card from "./Card";
 import { cardData } from "../assets/cardData";
 
 import SearchIcon from "@mui/icons-material/Search";
-import { Add, NotificationAddOutlined } from "@mui/icons-material";
+import { Add, AddAPhoto, CheckBox, NotificationAddOutlined } from "@mui/icons-material";
 import { deepOrange } from "@mui/material/colors";
 import {
   Avatar,
   Badge,
+  Box,
   Button,
   FormControl,
   IconButton,
   InputLabel,
   MenuItem,
+  Modal,
   Select,
   TextField,
+  Typography,
 } from "@mui/material";
 
 const filteritem = [
@@ -34,19 +37,55 @@ const filteritem = [
 ];
 
 const Page1 = () => {
-  const [filters, setFilters] = useState("");
+  const [filters, setFilters] = useState("all");
   const [searchf, setSearchf] = useState("");
+  const [datefilter, setDatefilter] = useState(cardData);
+  const [openModal, setOpenModal] = useState(false);
 
-  const hendlefilter = (e) => {
-    setFilters(e.target.value);
+  const hendlemodal = () => {
+    setOpenModal(true);
+  };
+  const hendleClose = () => {
+    setOpenModal(false);
   };
 
+  const hendlefilter = (e) => {
+    const selectedFilter = e.target.value;
+    setFilters(selectedFilter);
+    let finalData = [];
+    if (
+      filteritem[+selectedFilter]?.label.toLowerCase() ===
+      filteritem[0].label.toLowerCase()
+    ) {
+      const datesort = cardData.sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+      );
+      finalData = datesort;
+    } else if (
+      filteritem[+selectedFilter]?.label.toLowerCase() ===
+      filteritem[1].label.toLowerCase()
+    ) {
+      const datesort = cardData.sort((a, b) =>
+        a.viewCount.localeCompare(b.viewCount)
+      );
+      finalData = datesort;
+    } else if (
+      filteritem[+selectedFilter]?.label.toLowerCase() ===
+      filteritem[2].label.toLowerCase()
+    ) {
+      const datesort = cardData.sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+      );
+      finalData = datesort;
+    }
 
-
-
-
-// useEffect
-//   // console.log(cardData.filter(user=>user.title.toLowerCase().includes("f")));
+    if (selectedFilter === "all") {
+      console.log("manish");
+      setDatefilter(cardData);
+    } else {
+      setDatefilter(finalData);
+    }
+  };
 
   return (
     <>
@@ -82,33 +121,90 @@ const Page1 = () => {
           </div>
 
           <div className="nav-icon">
-            <Button variant="contained" startIcon={<Add />}>
+            <Button
+              onClick={hendlemodal}
+              variant="contained"
+              startIcon={<Add />}
+            >
               New Post
             </Button>
+            <Modal
+             open={openModal}
+             onClose={hendleClose}
+             >
+              <Box className = "boxModal">
+                <div className="mainbox">
+                  <div className="postimg">
+                      <div className="postName">
+                        <h1>Add Post </h1>
+                      </div>
+                      <div className="postphoto">
+                        <AddAPhoto fontSize="large" />
+                      </div>
+                  </div>
+                  
+                  
+                  <form className="postdetail">
+                      <div className="postheading">
+                        <h1>Blog Post Info</h1>
+                      </div>
+                      
+                      <div className="postinput">
+                        <label className="inputlabel"> Post Name</label>
+                        <input type="text" placeholder="Manish " className="inputpost1"></input>
+                      </div>
+                      
+                      <div className="postdiscription">
+                        <label> Post Discription</label>
+                        <textarea type="text" placeholder="ADD DISCRIPTION " ></textarea>
+                      </div>
+                      
+                      <div>
+                        <label> Post Date</label>
+                        <input type="date" placeholder="Manish " ></input>
+                      </div>
+                      
+                      <div>
+                      <input type="checkbox"   />
+                      <label>I Agree all Policy</label>
+                      </div>
+                      
+                      <div>
+                      <Button variant="contained">Submit</Button>
+                      </div>
+                  </form>
+                </div>
+                </Box>
+            </Modal>
           </div>
         </div>
       </nav>
 
       <div className="search-div">
         <div className="search-item">
-          <TextField label="Search post..." variant="outlined"
-           value={searchf} onChange={(e)=>setSearchf(e.target.value)} />
-           
+          <TextField
+            label="Search post..."
+            variant="outlined"
+            value={searchf}
+            onChange={(e) => setSearchf(e.target.value)}
+          />
           <SearchIcon className="searchbar" />
         </div>
-
-
-
-
-
-
 
         <div className="search-icon">
           <FormControl sx={{ m: 2, minWidth: 100 }} size="small">
             <InputLabel>Latest</InputLabel>
             <Select label="Latest" value={filters} onChange={hendlefilter}>
+              <MenuItem value={"all"} disabled selected>
+                {" "}
+                All{" "}
+              </MenuItem>
               {filteritem.map((fvalue, index) => {
-                return <MenuItem value={index} key={index} >{fvalue.label} </MenuItem>;
+                return (
+                  <MenuItem value={index} key={index}>
+                    {fvalue.label}{" "}
+                  </MenuItem>
+                );
               })}
               {/* <MenuItem>Latest</MenuItem>
               <MenuItem>Popular</MenuItem>
@@ -120,23 +216,41 @@ const Page1 = () => {
 
       {/* <Card /> */}
       <div className="cardmap">
-        {cardData.filter((falitem)=>falitem.title.toLowerCase().includes(searchf.toLowerCase())).map((cardItem, index) => {
-          console.log(index);
-          const { image, date, title, shareCount, viewCount, messageCount } =
-            cardItem;
+        {datefilter.filter((falitem) =>
+          falitem.title.toLowerCase().includes(searchf.toLowerCase())
+        ).length === 0 ? (
+          <>
+            <div className="">No Result Found....</div>
+            {console.log("no data found")}
+          </>
+        ) : (
+          datefilter
+            .filter((falitem) =>
+              falitem.title.toLowerCase().includes(searchf.toLowerCase())
+            )
+            .map((cardItem, index) => {
+              const {
+                image,
+                date,
+                title,
+                shareCount,
+                viewCount,
+                messageCount,
+              } = cardItem;
 
-          return (
-            <Card
-              key={index}
-              image={image}
-              date={date}
-              title={title}
-              shareCount={shareCount}
-              viewCount={viewCount}
-              messageCount={messageCount}
-            />
-          );
-        })}
+              return (
+                <Card
+                  key={index}
+                  image={image}
+                  date={date}
+                  title={title}
+                  shareCount={shareCount}
+                  viewCount={viewCount}
+                  messageCount={messageCount}
+                />
+              );
+            })
+        )}
       </div>
     </>
   );

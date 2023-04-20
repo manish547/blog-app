@@ -207,6 +207,75 @@
 }
 
 
+/* modal box */
+
+.boxModal{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  border: 2px solid #000;
+}
+.mainbox{
+  /* border: 2px solid black; */
+  width: 50rem;
+  height: 34rem;
+  display: flex;
+  box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0, 0.24) ;
+  color: white;
+}
+.postimg{
+  background-color: #5eb7b7;
+  
+  width: 25rem;
+  height: 100%;
+}
+.postdetail{
+  background-color: #1b2a49;
+  width: 25rem;
+  height: 100%;
+}
+.postName{
+ margin: auto;
+ width: 10rem;
+ color: white;
+}
+.postphoto{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 75%;
+}
+.postinput{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  /* width: 10rem; */
+}
+.inputlabel{
+  
+  
+  border: none;
+}
+.inputpost1{
+  display: block;
+  width: 17rem;
+  height: 30px;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  outline: none;
+  color: rgba(255, 255, 255, 0.7) !important;
+  background: transparent;
+  border-radius: 0;
+  font-size: 18px;
+  
+}
+
+ 
+
+
 @media screen and (max-width: 560px) {
   .nav-div {
     display: flex;
