@@ -3,9 +3,18 @@ import React, { useState } from "react";
 import Card from "./Card";
 import { cardData } from "../assets/cardData";
 
+import { Add, AddAPhoto, NotificationAddOutlined } from "@mui/icons-material";
+
 import SearchIcon from "@mui/icons-material/Search";
-import { Add, AddAPhoto, CheckBox, NotificationAddOutlined } from "@mui/icons-material";
 import { deepOrange } from "@mui/material/colors";
+import dayjs from "dayjs";
+
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+
+import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
+
 import {
   Avatar,
   Badge,
@@ -18,7 +27,6 @@ import {
   Modal,
   Select,
   TextField,
-  Typography,
 } from "@mui/material";
 
 const filteritem = [
@@ -41,6 +49,7 @@ const Page1 = () => {
   const [searchf, setSearchf] = useState("");
   const [datefilter, setDatefilter] = useState(cardData);
   const [openModal, setOpenModal] = useState(false);
+  const [dateupdate, setDateupdate] = useState(dayjs("2023-04-21"));
 
   const hendlemodal = () => {
     setOpenModal(true);
@@ -65,9 +74,16 @@ const Page1 = () => {
       filteritem[+selectedFilter]?.label.toLowerCase() ===
       filteritem[1].label.toLowerCase()
     ) {
-      const datesort = cardData.sort((a, b) =>
-        a.viewCount.localeCompare(b.viewCount)
-      );
+      const datesort = cardData
+        .map((sortvalue) => {
+          sortvalue.viewCount = sortvalue?.viewCount
+            ?.toLowerCase()
+            .replace("k", "");
+          return sortvalue;
+        })
+        .sort((a, b) => {
+          return b.viewCount - a.viewCount;
+        });
       finalData = datesort;
     } else if (
       filteritem[+selectedFilter]?.label.toLowerCase() ===
@@ -104,7 +120,7 @@ const Page1 = () => {
             ></Avatar>
           </IconButton>
           <IconButton>
-            <Badge badgeContent={2} color="secondary">
+            <Badge badgeContent={2} color="warning">
               <NotificationAddOutlined />
             </Badge>
           </IconButton>
@@ -128,53 +144,115 @@ const Page1 = () => {
             >
               New Post
             </Button>
-            <Modal
-             open={openModal}
-             onClose={hendleClose}
-             >
-              <Box className = "boxModal">
+            <Modal open={openModal} onClose={hendleClose}>
+              <Box className="boxModal">
                 <div className="mainbox">
                   <div className="postimg">
-                      <div className="postName">
-                        <h1>Add Post </h1>
-                      </div>
-                      <div className="postphoto">
-                        <AddAPhoto fontSize="large" />
-                      </div>
+                    <div className="postName">
+                      <h1>Add Post </h1>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div className="postphoto">
+                      <label className="uplordphoto" typeof="file">
+                        <div>
+                        <div className="addaphoto">
+                          <AddAPhoto fontSize="large" />
+                        </div>
+                        <div className="h2pa">
+                          <h2>Drag & Drop Any File Here</h2>
+                          <p>
+                            Or <a href="/">browse file</a> from device
+                          </p>
+                        </div>
+                        <div className="sbutton">
+                          <Button
+                        variant="contained"
+                        size="large"
+                        className="btnbtn"
+                      >
+                        Submit
+                      </Button>
+                        </div>
+                        </div>
+                      </label>
+                    </div>
                   </div>
-                  
-                  
+
                   <form className="postdetail">
-                      <div className="postheading">
-                        <h1>Blog Post Info</h1>
-                      </div>
-                      
-                      <div className="postinput">
-                        <label className="inputlabel"> Post Name</label>
-                        <input type="text" placeholder="Manish " className="inputpost1"></input>
-                      </div>
-                      
-                      <div className="postdiscription">
-                        <label> Post Discription</label>
-                        <textarea type="text" placeholder="ADD DISCRIPTION " ></textarea>
-                      </div>
-                      
-                      <div>
-                        <label> Post Date</label>
-                        <input type="date" placeholder="Manish " ></input>
-                      </div>
-                      
-                      <div>
-                      <input type="checkbox"   />
+                    <div className="postheading">
+                      <h1>Blog Post Info</h1>
+                    </div>
+
+                    <div className="post-name">
+                      <label className="inputlabel" htmlFor="postname">
+                       
+                        Post Name
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Manish "
+                        className="inputpost1"
+                        id="postname"
+                      ></input>
+                    </div>
+
+                    <div className="postdiscription">
+                      {/* <label className="inputlabel2" htmlFor="textarea">
+                       Post Discription
+                      </label> */}
+                      <textarea
+                        className="inputpost2"
+                        type="text"
+                        placeholder="ADD POST DISCRIPTION "
+                        id="textarea"
+                      ></textarea>
+                    </div>
+
+                    <div className="datepicker">
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DemoContainer components={["MobileDatePicker"]}>
+                          <DemoItem label="Post Date">
+                            <MobileDatePicker
+                              value={dateupdate}
+                              onChange={(newdate) => setDateupdate(newdate)}
+                            />
+                          </DemoItem>
+                        </DemoContainer>
+                      </LocalizationProvider>
+                    </div>
+
+                    <div className="boxCheck">
+                      <input type="checkbox" />
                       <label>I Agree all Policy</label>
-                      </div>
-                      
-                      <div>
-                      <Button variant="contained">Submit</Button>
-                      </div>
+                    </div>
+
+                    <div className="btnsubmit">
+                      <Button
+                        variant="contained"
+                        size="large"
+                        className="btnbtn"
+                      >
+                        Submit
+                      </Button>
+                    </div>
                   </form>
                 </div>
-                </Box>
+              </Box>
             </Modal>
           </div>
         </div>
@@ -196,8 +274,7 @@ const Page1 = () => {
             <InputLabel>Latest</InputLabel>
             <Select label="Latest" value={filters} onChange={hendlefilter}>
               <MenuItem value={"all"} disabled selected>
-                {" "}
-                All{" "}
+                All
               </MenuItem>
               {filteritem.map((fvalue, index) => {
                 return (
@@ -220,7 +297,7 @@ const Page1 = () => {
           falitem.title.toLowerCase().includes(searchf.toLowerCase())
         ).length === 0 ? (
           <>
-            <div className="">No Result Found....</div>
+            <div className="nodata">No Result Found....</div>
             {console.log("no data found")}
           </>
         ) : (

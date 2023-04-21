@@ -1,12 +1,12 @@
 export const cardData = [
     { index: 0, image: "image_1", date: "09 may 2022",title: "Fresh Prince",
-     shareCount:"89.92k",viewCount:"54.91",messageCount: "65.51k"},
+     shareCount:"89.92k",viewCount:"54.91k",messageCount: "65.51k"},
 
     { index: 1, image: "image_2", date: "02 Nov 2022",title: "Six Socks Studio",
      shareCount:"58.20k",viewCount:"51.09k",messageCount: "33.11k"},
 
     { index: 2, image: "image_3", date: "08 Jul 2022",title: "vincenzo de cotiis crossing over showcase a research on contamination",
-     shareCount:"1.18k",viewCount:"14.29",messageCount: "35.92k"},
+     shareCount:"1.18k",viewCount:"14.29k",messageCount: "35.92k"},
 
     { index: 3, image: "image_4", date: "19 Oct 2022",title: "Simple, Great Looking Animations in Your Project | Video Tutorial",
      shareCount:"54.24k",viewCount:"67.83k",messageCount: "53.58k"},
