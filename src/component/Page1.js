@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 
-import Card from "./Card";
 import { cardData } from "../assets/cardData";
+import Card from "./Card";
 
+import { Add, AddAPhoto, NotificationAddOutlined } from "@mui/icons-material";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import SearchIcon from "@mui/icons-material/Search";
 import { deepOrange } from "@mui/material/colors";
 import dayjs from "dayjs";
-
-import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-
-import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
-
 import {
   Avatar,
   Badge,
@@ -27,6 +25,7 @@ import {
   TextField,
 } from "@mui/material";
 
+/* filter data */
 const filteritem = [
   {
     index: 0,
@@ -43,19 +42,13 @@ const filteritem = [
 ];
 
 const Page1 = () => {
-  const [filters, setFilters] = useState("all");
-  const [searchf, setSearchf] = useState("");
+  const [dateupdate, setDateupdate] = useState(dayjs("2023-04-21"));
   const [datefilter, setDatefilter] = useState(cardData);
   const [openModal, setOpenModal] = useState(false);
-  const [dateupdate, setDateupdate] = useState(dayjs("2023-04-21"));
+  const [filters, setFilters] = useState("all");
+  const [searchf, setSearchf] = useState("");
 
-  const hendlemodal = () => {
-    setOpenModal(true);
-  };
-  const hendleClose = () => {
-    setOpenModal(false);
-  };
-
+  /* handle filter events */
   const hendlefilter = (e) => {
     const selectedFilter = e.target.value;
     setFilters(selectedFilter);
@@ -102,7 +95,7 @@ const Page1 = () => {
   };
 
   return (
-    <>
+    <React.Fragment>
       <div className="header-div">
         <div className="header-item">
           <IconButton>
@@ -136,16 +129,13 @@ const Page1 = () => {
 
           <div className="nav-icon">
             <Button
-              onClick={hendlemodal}
+              onClick={() => setOpenModal(true)}
               variant="contained"
               startIcon={<Add />}
             >
               New Post
             </Button>
-            <Modal
-              open={openModal}
-              onClose={hendleClose}
-            >
+            <Modal open={openModal} onClose={() => setOpenModal(false)}>
               <Box className="boxModal">
                 <div className="mainbox">
                   <div className="postimg">
@@ -153,38 +143,85 @@ const Page1 = () => {
                       <h1>Add Post </h1>
                     </div>
                     <div className="postphoto">
-                      <AddAPhoto fontSize="large" />
+                      <label className="uplordphoto" typeof="file">
+                        <div>
+                          <div className="addaphoto">
+                            <AddAPhoto fontSize="large" />
+                          </div>
+                          <div className="h2pa">
+                            <h2>Drag & Drop Any File Here</h2>
+                            <p>
+                              Or <label>browse file</label> from device
+                            </p>
+                          </div>
+                          <input type="file" name="" id="" />
+                          <div className="sbutton">
+                            <Button
+                              variant="contained"
+                              size="large"
+                              className="btnbtn"
+                            >
+                              Submit
+                            </Button>
+                          </div>
+                        </div>
+                      </label>
                     </div>
                   </div>
-
 
                   <form className="postdetail">
                     <div className="postheading">
                       <h1>Blog Post Info</h1>
                     </div>
 
-                    <div className="postinput">
-                      <label className="inputlabel"> Post Name</label>
-                      <input type="text" placeholder="Manish " className="inputpost1"></input>
+                    <div className="post-name">
+                      <label className="inputlabel" htmlFor="postname">
+
+                        Post Name
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Manish "
+                        className="inputpost1"
+                        id="postname"
+                      ></input>
                     </div>
 
                     <div className="postdiscription">
-                      <label> Post Discription</label>
-                      <textarea type="text" placeholder="ADD DISCRIPTION " ></textarea>
+                      <textarea
+                        className="inputpost2"
+                        type="text"
+                        placeholder="ADD POST DISCRIPTION "
+                        id="textarea"
+                      ></textarea>
                     </div>
 
-                    <div>
-                      <label> Post Date</label>
-                      <input type="date" placeholder="Manish " ></input>
+                    <div className="datepicker">
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DemoContainer components={["MobileDatePicker"]}>
+                          <DemoItem label="Post Date">
+                            <MobileDatePicker
+                              value={dateupdate}
+                              onChange={(newdate) => setDateupdate(newdate)}
+                            />
+                          </DemoItem>
+                        </DemoContainer>
+                      </LocalizationProvider>
                     </div>
 
-                    <div>
+                    <div className="boxCheck">
                       <input type="checkbox" />
                       <label>I Agree all Policy</label>
                     </div>
 
-                    <div>
-                      <Button variant="contained">Submit</Button>
+                    <div className="btnsubmit">
+                      <Button
+                        variant="contained"
+                        size="large"
+                        className="btnbtn"
+                      >
+                        Submit
+                      </Button>
                     </div>
                   </form>
                 </div>
@@ -219,15 +256,12 @@ const Page1 = () => {
                   </MenuItem>
                 );
               })}
-              {/* <MenuItem>Latest</MenuItem>
-              <MenuItem>Popular</MenuItem>
-              <MenuItem>Oldest</MenuItem> */}
             </Select>
           </FormControl>
         </div>
       </div>
 
-      {/* <Card /> */}
+      {/* card component */}
       <div className="cardmap">
         {datefilter.filter((falitem) =>
           falitem.title.toLowerCase().includes(searchf.toLowerCase())
@@ -265,7 +299,7 @@ const Page1 = () => {
             })
         )}
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

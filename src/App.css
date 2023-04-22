@@ -225,7 +225,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  border: 2px solid #000;
 }
 
 .mainbox {
@@ -242,6 +241,30 @@
 
   width: 25rem;
   height: 100%;
+}
+
+.uplordphoto {
+  border: 2px dashed;
+  border-radius: 37px;
+  height: 50%;
+  width: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addaphoto {
+  text-align: center;
+}
+
+.h2pa {
+  text-align: center;
+}
+
+.sbutton {
+  text-align: center;
+  position: relative;
+  top: 6rem;
 }
 
 .postdetail {
@@ -266,8 +289,9 @@
 
 .postName {
   margin: auto;
-  width: 10rem;
-  color: white;
+  text-align: center;
+  position: relative;
+  top: 3rem;
 }
 
 .postphoto {
@@ -286,8 +310,6 @@
 }
 
 .inputlabel {
-
-
   border: none;
 }
 
@@ -302,7 +324,43 @@
   background: transparent;
   border-radius: 0;
   font-size: 18px;
+}
 
+.inputpost2 {
+  display: block;
+  width: 17rem;
+  height: 30px;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  outline: none;
+  color: rgba(255, 255, 255, 0.7) !important;
+  background: transparent;
+  border-radius: 0;
+  font-size: 18px;
+  padding: 5px 0px;
+}
+
+.datepicker {
+  position: relative;
+  right: 24px;
+}
+
+.boxCheck {
+  position: relative;
+  right: 4.2rem;
+  margin: 10px;
+  top: 4px;
+}
+
+.btnsubmit {
+  position: relative;
+  top: 3rem;
+  width: 100%;
+  text-align: center;
+}
+
+.btnbtn {
+  width: 70%;
 }
 
 
