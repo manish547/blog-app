@@ -85,10 +85,10 @@
   height: 70vh;
 }
 
-.nodata{
+.nodata {
   font-size: 36px;
-    font-weight: 600;
-    text-align: center;
+  font-weight: 600;
+  text-align: center;
 }
 
 .main-div {
@@ -148,7 +148,8 @@
   left: 25px;
   top: -2px;
 }
-.avatarlogo{
+
+.avatarlogo {
   position: relative;
   top: 5px;
   background-color: #dfe2e7;
@@ -218,50 +219,32 @@
 
 /* modal box */
 
-.boxModal{
+.boxModal {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
+
+  border: 2px solid #000;
 }
-.mainbox{
+
+.mainbox {
   /* border: 2px solid black; */
   width: 50rem;
   height: 34rem;
   display: flex;
-  box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0, 0.24) ;
+  box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0, 0.24);
   color: white;
 }
-.postimg{
+
+.postimg {
   background-color: #5eb7b7;
-  
+
   width: 25rem;
   height: 100%;
 }
 
-.uplordphoto{
-  border: 2px dashed;
-  border-radius: 37px;
-  height: 50%;
-  width: 85%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.addaphoto{
-  text-align: center;
-}
-.h2pa{
-  text-align: center;
-}
-.sbutton{
-  text-align: center;
-  position: relative;
-  top: 6rem;
-}
-
-.postdetail{
+.postdetail {
   background-color: #1b2a49;
   width: 25rem;
   height: 100%;
@@ -271,49 +254,44 @@
   justify-content: center;
   position: relative;
 }
-.postheading{
+
+.postheading {
   position: absolute;
   top: 3rem;
 }
-.post-name{
+
+.post-name {
   padding: 1rem;
 }
 
-.postName{
- margin: auto;
-text-align: center;
-position: relative;
-top: 3rem;
+.postName {
+  margin: auto;
+  width: 10rem;
+  color: white;
 }
-.postphoto{
+
+.postphoto {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 75%;
 }
-.postinput{
+
+.postinput {
   display: flex;
   flex-direction: column;
-  align-items:flex-start;
+  align-items: flex-start;
   justify-content: center;
 
 }
-.inputlabel{ border: none;
-}
-.inputpost1{
-  display: block;
-  width: 17rem;
-  height: 30px;
+
+.inputlabel {
+
+
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  outline: none;
-  color: rgba(255, 255, 255, 0.7) !important;
-  background: transparent;
-  border-radius: 0;
-  font-size: 18px;  
 }
 
-.inputpost2{
+.inputpost1 {
   display: block;
   width: 17rem;
   height: 30px;
@@ -324,29 +302,10 @@ top: 3rem;
   background: transparent;
   border-radius: 0;
   font-size: 18px;
-  padding: 5px 0px;  
-}
-.datepicker{
-  position: relative;
-  right: 24px;
-}
-.boxCheck{
-  position: relative;
-  right: 4.2rem;
-  margin: 10px;
-  top: 4px;
-}
-.btnsubmit{
-  position: relative;
-  top: 3rem;
-  width: 100%;
-  text-align: center;
-}
-.btnbtn{
-  width: 70%;
+
 }
 
- 
+
 
 
 @media screen and (max-width: 560px) {
@@ -398,18 +357,20 @@ top: 3rem;
 }
 
 @media screen and (max-width: 800px) {
-  .boxModal{
+  .boxModal {
     position: absolute;
   }
-  .mainbox{
+
+  .mainbox {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
+
   .postimg {
     background-color: #5eb7b7;
     width: 25rem;
     height: 100%;
-}
+  }
 }

@@ -3,8 +3,6 @@ import React, { useState } from "react";
 import Card from "./Card";
 import { cardData } from "../assets/cardData";
 
-import { Add, AddAPhoto, NotificationAddOutlined } from "@mui/icons-material";
-
 import SearchIcon from "@mui/icons-material/Search";
 import { deepOrange } from "@mui/material/colors";
 import dayjs from "dayjs";
@@ -144,111 +142,49 @@ const Page1 = () => {
             >
               New Post
             </Button>
-            <Modal open={openModal} onClose={hendleClose}>
+            <Modal
+              open={openModal}
+              onClose={hendleClose}
+            >
               <Box className="boxModal">
                 <div className="mainbox">
                   <div className="postimg">
                     <div className="postName">
                       <h1>Add Post </h1>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     <div className="postphoto">
-                      <label className="uplordphoto" typeof="file">
-                        <div>
-                        <div className="addaphoto">
-                          <AddAPhoto fontSize="large" />
-                        </div>
-                        <div className="h2pa">
-                          <h2>Drag & Drop Any File Here</h2>
-                          <p>
-                            Or <a href="/">browse file</a> from device
-                          </p>
-                        </div>
-                        <div className="sbutton">
-                          <Button
-                        variant="contained"
-                        size="large"
-                        className="btnbtn"
-                      >
-                        Submit
-                      </Button>
-                        </div>
-                        </div>
-                      </label>
+                      <AddAPhoto fontSize="large" />
                     </div>
                   </div>
+
 
                   <form className="postdetail">
                     <div className="postheading">
                       <h1>Blog Post Info</h1>
                     </div>
 
-                    <div className="post-name">
-                      <label className="inputlabel" htmlFor="postname">
-                       
-                        Post Name
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Manish "
-                        className="inputpost1"
-                        id="postname"
-                      ></input>
+                    <div className="postinput">
+                      <label className="inputlabel"> Post Name</label>
+                      <input type="text" placeholder="Manish " className="inputpost1"></input>
                     </div>
 
                     <div className="postdiscription">
-                      {/* <label className="inputlabel2" htmlFor="textarea">
-                       Post Discription
-                      </label> */}
-                      <textarea
-                        className="inputpost2"
-                        type="text"
-                        placeholder="ADD POST DISCRIPTION "
-                        id="textarea"
-                      ></textarea>
+                      <label> Post Discription</label>
+                      <textarea type="text" placeholder="ADD DISCRIPTION " ></textarea>
                     </div>
 
-                    <div className="datepicker">
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DemoContainer components={["MobileDatePicker"]}>
-                          <DemoItem label="Post Date">
-                            <MobileDatePicker
-                              value={dateupdate}
-                              onChange={(newdate) => setDateupdate(newdate)}
-                            />
-                          </DemoItem>
-                        </DemoContainer>
-                      </LocalizationProvider>
+                    <div>
+                      <label> Post Date</label>
+                      <input type="date" placeholder="Manish " ></input>
                     </div>
 
-                    <div className="boxCheck">
+                    <div>
                       <input type="checkbox" />
                       <label>I Agree all Policy</label>
                     </div>
 
-                    <div className="btnsubmit">
-                      <Button
-                        variant="contained"
-                        size="large"
-                        className="btnbtn"
-                      >
-                        Submit
-                      </Button>
+                    <div>
+                      <Button variant="contained">Submit</Button>
                     </div>
                   </form>
                 </div>
