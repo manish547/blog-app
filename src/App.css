@@ -237,7 +237,9 @@
   background-color: #5eb7b7;
   
   width: 25rem;
-  height: 100%;
+  /* height: 100%; */
+  display: flex;
+  justify-content: center;
 }
 
 .uplordphoto{
@@ -255,11 +257,6 @@
 .h2pa{
   text-align: center;
 }
-.sbutton{
-  text-align: center;
-  position: relative;
-  top: 6rem;
-}
 
 .postdetail{
   background-color: #1b2a49;
@@ -270,6 +267,11 @@
   align-items: center;
   justify-content: center;
   position: relative;
+}
+.formdiv{
+  display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .postheading{
   position: absolute;
@@ -329,7 +331,9 @@ top: 3rem;
 .datepicker{
   position: relative;
   right: 24px;
+  color: white;
 }
+
 .boxCheck{
   position: relative;
   right: 4.2rem;
@@ -344,6 +348,22 @@ top: 3rem;
 }
 .btnbtn{
   width: 70%;
+}
+.close{
+ 
+    background-color: #fffcfc;
+    position: absolute;
+    color: black;
+    top: -11px;
+    right: -11px;
+    border-radius: 100%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
 }
 
  
@@ -398,18 +418,56 @@ top: 3rem;
 }
 
 @media screen and (max-width: 800px) {
-  .boxModal{
-    position: absolute;
-  }
+  
   .mainbox{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 85vh;
+
   }
   .postimg {
     background-color: #5eb7b7;
-    width: 25rem;
-    height: 100%;
+    width: 100vw;
+    height: 34vh;
+  
 }
+
+
+.formdiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.btnsubmit Button{
+  margin-top: -55px;
+}
+
+}
+
+
+
+/* singin from  */
+
+.singin-from{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}
+.social-div{
+     padding: 1px 21px;
+    height: 22px;
+    width: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

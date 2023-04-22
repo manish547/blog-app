@@ -3,7 +3,12 @@ import React, { useState } from "react";
 import Card from "./Card";
 import { cardData } from "../assets/cardData";
 
-import { Add, AddAPhoto, NotificationAddOutlined } from "@mui/icons-material";
+import {
+  Add,
+  AddAPhoto,
+  Close,
+  NotificationAddOutlined,
+} from "@mui/icons-material";
 
 import SearchIcon from "@mui/icons-material/Search";
 import { deepOrange } from "@mui/material/colors";
@@ -29,6 +34,7 @@ import {
   TextField,
 } from "@mui/material";
 
+
 const filteritem = [
   {
     index: 0,
@@ -50,13 +56,6 @@ const Page1 = () => {
   const [datefilter, setDatefilter] = useState(cardData);
   const [openModal, setOpenModal] = useState(false);
   const [dateupdate, setDateupdate] = useState(dayjs("2023-04-21"));
-
-  const hendlemodal = () => {
-    setOpenModal(true);
-  };
-  const hendleClose = () => {
-    setOpenModal(false);
-  };
 
   const hendlefilter = (e) => {
     const selectedFilter = e.target.value;
@@ -138,117 +137,106 @@ const Page1 = () => {
 
           <div className="nav-icon">
             <Button
-              onClick={hendlemodal}
+              onClick={() => setOpenModal(true)}
               variant="contained"
               startIcon={<Add />}
             >
               New Post
             </Button>
-            <Modal open={openModal} onClose={hendleClose}>
+            <Modal open={openModal} onClose={() => setOpenModal(false)}>
               <Box className="boxModal">
                 <div className="mainbox">
                   <div className="postimg">
-                    <div className="postName">
-                      <h1>Add Post </h1>
-                    </div>
+                    <div className="postimgdiv">
+                      <div className="postName">
+                        <h1>Add Post </h1>
+                      </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <div className="postphoto">
-                      <label className="uplordphoto" typeof="file">
-                        <div>
-                        <div className="addaphoto">
-                          <AddAPhoto fontSize="large" />
-                        </div>
-                        <div className="h2pa">
-                          <h2>Drag & Drop Any File Here</h2>
-                          <p>
-                            Or <a href="/">browse file</a> from device
-                          </p>
-                        </div>
-                        <div className="sbutton">
-                          <Button
-                        variant="contained"
-                        size="large"
-                        className="btnbtn"
-                      >
-                        Submit
-                      </Button>
-                        </div>
-                        </div>
-                      </label>
+                      <div className="postphoto">
+                        <label className="uplordphoto">
+                          <div>
+                            <div className="addaphoto">
+                              <AddAPhoto fontSize="large" />
+                            </div>
+                            <div className="h2pa">
+                              <h2>Drag & Drop Any File Here</h2>
+                              <p>
+                                Or <a href="/">browse file</a> from device
+                              </p>
+                            </div>
+                          </div>
+                        </label>
+                      </div>
                     </div>
                   </div>
 
                   <form className="postdetail">
-                    <div className="postheading">
-                      <h1>Blog Post Info</h1>
-                    </div>
+                    <div className="formdiv">
+                      <div className="postheading">
+                        <h1>Blog Post Info</h1>
+                      </div>
 
-                    <div className="post-name">
-                      <label className="inputlabel" htmlFor="postname">
-                       
+                      <div className="post-name">
+                        {/* <label className="inputlabel" htmlFor="postname">
                         Post Name
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Manish "
-                        className="inputpost1"
-                        id="postname"
-                      ></input>
-                    </div>
+                      </label> */}
+                        <input
+                          type="text"
+                          placeholder="Manish "
+                          className="inputpost1"
+                          id="postname"
+                        ></input>
+                      </div>
 
-                    <div className="postdiscription">
-                      {/* <label className="inputlabel2" htmlFor="textarea">
+                      <div className="postdiscription">
+                        {/* <label className="inputlabel2" htmlFor="textarea">
                        Post Discription
                       </label> */}
-                      <textarea
-                        className="inputpost2"
-                        type="text"
-                        placeholder="ADD POST DISCRIPTION "
-                        id="textarea"
-                      ></textarea>
-                    </div>
+                        <textarea
+                          className="inputpost2"
+                          type="text"
+                          placeholder="ADD POST DISCRIPTION "
+                          id="textarea"
+                        ></textarea>
+                      </div>
 
-                    <div className="datepicker">
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DemoContainer components={["MobileDatePicker"]}>
-                          <DemoItem label="Post Date">
-                            <MobileDatePicker
-                              value={dateupdate}
-                              onChange={(newdate) => setDateupdate(newdate)}
-                            />
-                          </DemoItem>
-                        </DemoContainer>
-                      </LocalizationProvider>
-                    </div>
+                      <div className="datepicker">
+                        <LocalizationProvider  dateAdapter={AdapterDayjs}>
+                          <DemoContainer  components={["MobileDatePicker"]}>
+                               {/* className="datePicker1"
+                               className="datePicker1"
+                               className="datePicker1" */}
+                            <DemoItem  label="Post Date">
+                              <MobileDatePicker 
+                               sx={{
+                                  Color: "white",
+                                  border: "1px solid rgba(54, 64, 92, 1)",
+                                 }}
+                                value={dateupdate}
+                                onChange={(newdate) => setDateupdate(newdate)}
+                              />
+                            </DemoItem>
+                          </DemoContainer>
+                        </LocalizationProvider>
+                      </div>
 
-                    <div className="boxCheck">
-                      <input type="checkbox" />
-                      <label>I Agree all Policy</label>
-                    </div>
+                      <div className="boxCheck">
+                        <input type="checkbox" />
+                        <label>I Agree all Policy</label>
+                      </div>
 
-                    <div className="btnsubmit">
-                      <Button
-                        variant="contained"
-                        size="large"
-                        className="btnbtn"
-                      >
-                        Submit
-                      </Button>
+                      <div className="btnsubmit">
+                        <Button
+                          variant="contained"
+                          size="large"
+                          className="btnbtn"
+                        >
+                          Submit
+                        </Button>
+                      </div>
+                    </div>
+                    <div className="close"  >
+                      <Close onClick={()=> setOpenModal(false)}  />
                     </div>
                   </form>
                 </div>
@@ -279,7 +267,7 @@ const Page1 = () => {
               {filteritem.map((fvalue, index) => {
                 return (
                   <MenuItem value={index} key={index}>
-                    {fvalue.label}{" "}
+                    {fvalue.label}
                   </MenuItem>
                 );
               })}

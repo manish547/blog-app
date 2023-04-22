@@ -1,9 +1,15 @@
-import React from "react";
-
+import React, { useState } from "react";
 import { Chat, Share, Visibility } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 
+const min = 1;
+const max = 4;
+
+
 const Card = ({ image, date, title, shareCount, viewCount, messageCount }) => {
+  const reondmimg = Math.floor(Math.random() * (max - min +1) +min);
+  const[filterlogo]= useState(reondmimg)
+
   return (
     <div>
       <div className="main-div">
@@ -24,8 +30,9 @@ const Card = ({ image, date, title, shareCount, viewCount, messageCount }) => {
                   className="shape-avatar"
                 />
               </div>
+
               <div className="avatarlogo">
-                <Avatar src="./image/pngegg.png"  />
+                <Avatar src={`/image/img_${filterlogo}.png`} />
               </div>
             </span>
           </div>
