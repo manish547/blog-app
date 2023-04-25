@@ -85,10 +85,10 @@
   height: 70vh;
 }
 
-.nodata{
+.nodata {
   font-size: 36px;
-    font-weight: 600;
-    text-align: center;
+  font-weight: 600;
+  text-align: center;
 }
 
 .main-div {
@@ -148,7 +148,8 @@
   left: 25px;
   top: -2px;
 }
-.avatarlogo{
+
+.avatarlogo {
   position: relative;
   top: 5px;
   background-color: #dfe2e7;
@@ -218,31 +219,33 @@
 
 /* modal box */
 
-.boxModal{
+.boxModal {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
+
 }
-.mainbox{
+
+.mainbox {
   /* border: 2px solid black; */
   width: 50rem;
   height: 34rem;
   display: flex;
-  box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0, 0.24) ;
+  box-shadow: 0px 10px 34px -15px rgba(0, 0, 0, 0, 0.24);
   color: white;
 }
-.postimg{
+
+.postimg {
   background-color: #5eb7b7;
-  
+
   width: 25rem;
   /* height: 100%; */
   display: flex;
   justify-content: center;
 }
 
-.uplordphoto{
+.uplordphoto {
   border: 2px dashed;
   border-radius: 37px;
   height: 50%;
@@ -251,14 +254,16 @@
   align-items: center;
   justify-content: center;
 }
-.addaphoto{
-  text-align: center;
-}
-.h2pa{
+
+.addaphoto {
   text-align: center;
 }
 
-.postdetail{
+.h2pa {
+  text-align: center;
+}
+
+.postdetail {
   background-color: #1b2a49;
   width: 25rem;
   height: 100%;
@@ -268,54 +273,49 @@
   justify-content: center;
   position: relative;
 }
-.formdiv{
+
+.formdiv {
   display: flex;
-    flex-direction: column;
-    align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
-.postheading{
+
+.postheading {
   position: absolute;
   top: 3rem;
 }
-.post-name{
+
+.post-name {
   padding: 1rem;
 }
 
-.postName{
- margin: auto;
-text-align: center;
-position: relative;
-top: 3rem;
+.postName {
+  margin: auto;
+  text-align: center;
+  position: relative;
+  top: 3rem;
 }
-.postphoto{
+
+.postphoto {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 75%;
 }
-.postinput{
+
+.postinput {
   display: flex;
   flex-direction: column;
-  align-items:flex-start;
+  align-items: flex-start;
   justify-content: center;
 
 }
-.inputlabel{ border: none;
-}
-.inputpost1{
-  display: block;
-  width: 17rem;
-  height: 30px;
+
+.inputlabel {
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  outline: none;
-  color: rgba(255, 255, 255, 0.7) !important;
-  background: transparent;
-  border-radius: 0;
-  font-size: 18px;  
 }
 
-.inputpost2{
+.inputpost1 {
   display: block;
   width: 17rem;
   height: 30px;
@@ -326,47 +326,64 @@ top: 3rem;
   background: transparent;
   border-radius: 0;
   font-size: 18px;
-  padding: 5px 0px;  
 }
-.datepicker{
+
+.inputpost2 {
+  display: block;
+  width: 17rem;
+  height: 30px;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  outline: none;
+  color: rgba(255, 255, 255, 0.7) !important;
+  background: transparent;
+  border-radius: 0;
+  font-size: 18px;
+  padding: 5px 0px;
+}
+
+.datepicker {
   position: relative;
   right: 24px;
   color: white;
 }
 
-.boxCheck{
+.boxCheck {
   position: relative;
   right: 4.2rem;
   margin: 10px;
   top: 4px;
 }
-.btnsubmit{
+
+.btnsubmit {
   position: relative;
   top: 3rem;
   width: 100%;
   text-align: center;
 }
-.btnbtn{
+
+.btnbtn {
   width: 70%;
 }
-.close{
- 
-    background-color: #fffcfc;
-    position: absolute;
-    color: black;
-    top: -11px;
-    right: -11px;
-    border-radius: 100%;
-    height: 30px;
-    width: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+
+.close {
+
+  background-color: #fffcfc;
+  position: absolute;
+  color: black;
+  top: -11px;
+  right: -11px;
+  border-radius: 100%;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 
 }
 
- 
+
 
 
 @media screen and (max-width: 560px) {
@@ -418,8 +435,8 @@ top: 3rem;
 }
 
 @media screen and (max-width: 800px) {
-  
-  .mainbox{
+
+  .mainbox {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -427,47 +444,27 @@ top: 3rem;
     height: 85vh;
 
   }
+
   .postimg {
     background-color: #5eb7b7;
     width: 100vw;
     height: 34vh;
-  
-}
+
+  }
 
 
-.formdiv{
+  .formdiv {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-.btnsubmit Button{
-  margin-top: -55px;
-}
+  }
+
+  .btnsubmit Button {
+    margin-top: -55px;
+  }
 
 }
 
 
 
-/* singin from  */
-
-.singin-from{
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.media-wrapper{
-  display: flex;
-  align-items: center;
-  justify-content:space-between;
-}
-.social-div{
-     padding: 1px 21px;
-    height: 22px;
-    width: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
