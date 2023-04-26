@@ -1,8 +1,11 @@
-import { VisibilityOff } from "@mui/icons-material";
-import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
-import { Button, Checkbox } from "@mui/material";
 import React, { useState } from "react";
+
 import "./singup.css";
+
+import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
+import { VisibilityOff } from "@mui/icons-material";
+import { Button, Checkbox } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Singup = () => {
   const [showpass, setShowpass] = useState(true);
@@ -12,49 +15,49 @@ const Singup = () => {
     password: "",
   });
 
+  const navigation = useNavigate();
+
   const [isVerified, setIsVerified] = useState({
     email: false,
     user: false,
     password: false,
   });
 
-  console.log(isVerified);
-
+  /* handle input value change */
   const hendleInput = (e) => {
-    const emailReX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-    const regex = /^[a-zA-Z0-9_-]{5,12}$/;
-    const passwordPattern =
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{5,12}$/;
     const value = e.target.value;
     const name = e.target.name;
+    const passwordPattern =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{5,12}$/;
+    const emailReX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    const regex = /^[a-zA-Z0-9_-]{5,12}$/;
 
     if (name === "email" && emailReX.test(value)) {
-      /* email */
-      // setIsVerified(true);
       setIsVerified((prevData) => ({
         ...prevData,
         email: true,
       }));
+
       setInput((prevState) => ({
         ...prevState,
         [name]: value,
       }));
     } else if (name === "user" && regex.test(value)) {
-      // errors.user = "Password is required";
       setIsVerified((prevData) => ({
         ...prevData,
         user: true,
       }));
+
       setInput((prevState) => ({
         ...prevState,
         [name]: value,
       }));
     } else if (name === "password" && passwordPattern.test(value)) {
-      // errors.user = "Password is required";
       setIsVerified((prevData) => ({
         ...prevData,
         password: true,
       }));
+
       setInput((prevState) => ({
         ...prevState,
         [name]: value,
@@ -65,6 +68,7 @@ const Singup = () => {
         [name]: false,
       }));
     }
+
     setInput((prevState) => ({
       ...prevState,
       [name]: value,
@@ -75,11 +79,14 @@ const Singup = () => {
     setShowpass(!showpass);
   };
 
+  /* handle form submit */
   const HeandleSubmit = (e) => {
     e.preventDefault();
-    if (input.email && input.password && input.user) {
+    if (isVerified.email && isVerified.password && isVerified.user) {
       localStorage.setItem("userData", JSON.stringify(input));
-    
+      navigation("/home");
+      console.log(input);
+
       setInput({
         email: "",
         user: "",
@@ -87,18 +94,18 @@ const Singup = () => {
       });
     } else {
       setInput({
-        email: " ",
-        user: " ",
-        password: " ",
+        email: "",
+        user: "",
+        password: "",
       });
       setIsVerified((prev) => {
         return {
-          email: input.email ? prev.email : false,
-          user: input.user ? prev.user : false,
-          password: input.password ? prev.password : false,
+          email: input.email.length>5 ? prev.email : false,
+          user: input.user ? prev.user.length>5 : false,
+          password: input.password.length>5 ? prev.password : false,
         };
       });
-    }   
+    }
   };
 
   return (
@@ -146,7 +153,6 @@ const Singup = () => {
             </div>
 
             <form className="sing-form" onSubmit={HeandleSubmit}>
-              {/* add email, password, chackbox  and button  */}
               <div className="input-div">
                 <div className="vaid-div">
                   <div

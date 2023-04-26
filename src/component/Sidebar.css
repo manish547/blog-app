@@ -1,0 +1,43 @@
+.sidebar1{
+    width: 100% !important;
+    display: flex;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    height: 100%;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    padding: 0px 69px;
+    background-color: #2a2a2d;
+    color: white;
+    font-size: 16px;
+    font-weight: 300;
+    font-size: 0.875rem;
+    line-height: 0;
+    border-radius: 0.75rem;
+    padding-top: 2rem;
+}
+
+.line-hr{
+    width: 100%;
+    color: #616167;
+    background-color: #69696f;
+}
+.Sideberhading{
+    text-transform: capitalize;
+    padding: 1rem 0rem;
+}
+.manu-div{
+    padding: 2rem 0rem;
+}
+.manu-name{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 1.5rem 0rem;
+    gap: 1.5rem;
+    font-size: 16px;
+    font-weight: lighter;
+}
+.manu-name > span{
+
+}

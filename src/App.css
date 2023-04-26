@@ -20,12 +20,10 @@
   gap: 2rem;
   border: 0px;
   border-radius: 50%;
+  text-transform: capitalize;
 }
 
-.header-item:hover {
-  color: #dfdfdf;
 
-}
 
 .header-icon {
   display: flex;
@@ -466,5 +464,39 @@
 
 }
 
+
+
+.home-sidebar{
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    margin: auto;
+}
+.sidebar-div{
+  max-width: 20%;
+  height: 96vh;
+  /* border: 1px solid red; */
+  width: 100%;
+  margin-left: 20px;
+}
+.home-page-div{
+  max-width: 100%;
+  height: 100vh;
+}
+
+.manuopen-icon{
+  display: none !important;
+}
+
+@media screen and (max-width:640px){
+  .manuopen-icon{
+    display: block !important;
+  }
+  .sidebar-div{
+   display: none;
+  }
+}
 
 

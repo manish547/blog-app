@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import Card from "./Card";
 import { cardData } from "../assets/cardData";
+import Sidebar from "./Sidebar";
 
 import {
   Add,
   AddAPhoto,
   Close,
+  MenuOpenOutlined,
   NotificationAddOutlined,
 } from "@mui/icons-material";
 
@@ -32,8 +34,9 @@ import {
   Modal,
   Select,
   TextField,
+  Tooltip,
 } from "@mui/material";
-
+import { useNavigate } from "react-router-dom";
 
 const filteritem = [
   {
@@ -51,12 +54,19 @@ const filteritem = [
 ];
 
 const Page1 = () => {
+  const sideBarRaf= useRef();
   const [filters, setFilters] = useState("all");
   const [searchf, setSearchf] = useState("");
   const [datefilter, setDatefilter] = useState(cardData);
   const [openModal, setOpenModal] = useState(false);
   const [dateupdate, setDateupdate] = useState(dayjs("2023-04-21"));
+  const navigate = useNavigate()
+  const [open, setOpen] = useState(true);
 
+  const email = localStorage.getItem("userData")
+    ? JSON.parse(localStorage.getItem("userData"))
+    : "";
+  console.log(email, "mshjs");
   const hendlefilter = (e) => {
     const selectedFilter = e.target.value;
     setFilters(selectedFilter);
@@ -102,14 +112,29 @@ const Page1 = () => {
     }
   };
 
+  const hendleLogout = () => {
+     localStorage.removeItem('userData')
+    //  console.log(localStorage.removeItem('userData'));
+    navigate('/')
+  }
+
+  const hendleopen = () => {
+    
+    console.log(sideBarRaf.current);
+    sideBarRaf.current.style.display = 'block'
+      setOpen(!open)
+  }
+  
+
   return (
     <>
-      <div className="header-div">
-        <div className="header-item">
-          <IconButton>
-            <SearchIcon />
-          </IconButton>
-        </div>
+    
+    <div className="home-sidebar">
+      <div className="sidebar-div" ref={sideBarRaf}>{open ? <Sidebar /> : ''}</div>
+      <div className="home-page-div">
+        <div className="header-div">
+          <MenuOpenOutlined className="manuopen-icon" onClick={hendleopen} />
+        <div className="header-item">{email.user}</div>
 
         <div className="header-icon">
           <IconButton size="small">
@@ -124,9 +149,13 @@ const Page1 = () => {
             </Badge>
           </IconButton>
 
-          <IconButton size="small">
-            <Avatar sx={{ bgcolor: deepOrange[400] }}>M</Avatar>
+            <Tooltip title={email.email} placement="bottom-end"  arrow>
+          <IconButton size="small" onClick={hendleLogout}>
+            <Avatar sx={{ bgcolor: deepOrange[400] }}>
+              {email.email.substring(0, 1).toUpperCase()}
+            </Avatar>
           </IconButton>
+          </Tooltip>
         </div>
       </div>
       <nav>
@@ -201,17 +230,17 @@ const Page1 = () => {
                       </div>
 
                       <div className="datepicker">
-                        <LocalizationProvider  dateAdapter={AdapterDayjs}>
-                          <DemoContainer  components={["MobileDatePicker"]}>
-                               {/* className="datePicker1"
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                          <DemoContainer components={["MobileDatePicker"]}>
+                            {/* className="datePicker1"
                                className="datePicker1"
                                className="datePicker1" */}
-                            <DemoItem  label="Post Date">
-                              <MobileDatePicker 
-                               sx={{
+                            <DemoItem label="Post Date">
+                              <MobileDatePicker
+                                sx={{
                                   Color: "white",
                                   border: "1px solid rgba(54, 64, 92, 1)",
-                                 }}
+                                }}
                                 value={dateupdate}
                                 onChange={(newdate) => setDateupdate(newdate)}
                               />
@@ -235,8 +264,8 @@ const Page1 = () => {
                         </Button>
                       </div>
                     </div>
-                    <div className="close"  >
-                      <Close onClick={()=> setOpenModal(false)}  />
+                    <div className="close">
+                      <Close onClick={() => setOpenModal(false)} />
                     </div>
                   </form>
                 </div>
@@ -317,6 +346,9 @@ const Page1 = () => {
             })
         )}
       </div>
+      </div>
+    </div>
+      
     </>
   );
 };
