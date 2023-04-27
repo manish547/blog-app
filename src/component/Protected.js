@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Singup from "./Singup";
+import Singup from "./singup/Singup";
 import { useState } from "react";
 
 const Protected = (props) => {
@@ -19,7 +19,7 @@ const Protected = (props) => {
     }else{
       setLoggedIn(true)
     }
-  });
+  },[navigate]);
 
   return <div>{loggedIn ? <Component /> : <Singup />}</div>;
 };

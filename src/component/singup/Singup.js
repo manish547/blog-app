@@ -15,6 +15,8 @@ const Singup = () => {
     password: "",
   });
 
+  
+
   const navigation = useNavigate();
 
   const [isVerified, setIsVerified] = useState({
@@ -72,7 +74,9 @@ const Singup = () => {
     setInput((prevState) => ({
       ...prevState,
       [name]: value,
+      
     }));
+ 
   };
 
   const btntoggle = () => {

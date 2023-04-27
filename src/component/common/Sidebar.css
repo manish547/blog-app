@@ -1,0 +1,82 @@
+.sidebar1{
+    display: flex;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    height: 96%;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: flex-start;
+    padding: 0px 69px;
+    /* background-color: #29292c; */
+    color: white;
+    font-size: 16px;
+    font-weight: 300;
+    font-size: 0.875rem;
+    line-height: 0;
+    border-radius: 0.75rem;
+    padding-top: 1rem;
+    position:fixed;
+    padding: 6px;
+    background: linear-gradient(195deg, rgb(66, 66, 74), rgb(25, 25, 25));
+}
+
+.line-hr{
+    width: 100%;
+    color: #616167;
+    background-color: #69696f;
+    flex-shrink: 0;
+    border-top: 0px solid rgba(0, 0, 0, 0.08);
+    border-right: 0px solid rgba(0, 0, 0, 0.08);
+    border-left: 0px solid rgba(0, 0, 0, 0.08);
+    height: 0.0625rem;
+    margin: 1rem 0px;
+    border-bottom: none;
+    opacity: 0.45;
+    background-color: transparent;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgb(255, 255, 255), rgba(255, 255, 255, 0)) !important;
+   
+}
+
+.manu-div{
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+}
+.manu-name{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.8rem 3rem;
+    gap: 1.5rem;
+    font-size: 14px;
+    font-weight: lighter;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.manu-name:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+.Sideberhading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-size: 12px;
+    text-transform: capitalize;
+    padding: 1rem 4rem;
+}
+.active{
+    background: linear-gradient(195deg, rgb(73, 163, 241), rgb(26, 115, 232));
+}
+
+@media screen and (max-width:640px){
+    .sidebar1{
+        display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    }
+}
