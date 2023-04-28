@@ -72,6 +72,7 @@
     background: linear-gradient(195deg, rgb(73, 163, 241), rgb(26, 115, 232));
 }
 
+
 @media screen and (max-width:640px){
     .sidebar1{
         display: flex;
@@ -79,4 +80,9 @@
     flex-wrap: wrap;
     width: 100%;
     }
+    .hide-sidebar{
+        display: none;
+        visibility: hidden !important;
+    }
+   
 }

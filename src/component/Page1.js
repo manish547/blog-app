@@ -19,6 +19,7 @@ const Page1 = () => {
     setOpen(!open);
   };
   const hendleactive = (index) =>{
+    console.log("clicked",index);
       setIsselected(index)
   }
   return (
@@ -38,8 +39,8 @@ const Page1 = () => {
           {/* <Home  sidebarClick = {hendleopen} /> */}
           {
             isselected === 'home' ? (<Home  sidebarClick = {hendleopen} />) 
-            : isselected === 'table' ? <TablePage  /> 
-            : isselected === 'notifications' ? <Notifications /> 
+            : isselected === 'table' ? <TablePage Toactive={hendleactive}  /> 
+            : isselected === 'notifications' ? <Notifications Toactive={hendleactive} /> 
             : isselected === 'viewmode' ? <ViewPage />
             : isselected === 'singin' ? <Singup /> 
             : ""

@@ -44,15 +44,16 @@ const tableData = [
 ];
 
 const Sidebar = ({Selected , Toactive}) => {
-  // const [toactive, setToactive] = useState("Home");
+  const [toactive, setToactive] = useState(false);
 
   const handleClick = (index) => {
     Toactive(index);
+    setToactive(true)
   };
 
   return (
     <>
-      <div className="sidebar1">
+      <div className={`sidebar1 ${toactive ? 'hide-sidebar' : '' }`}>
         <div className="Sideberhading">
           <BookOnline />
           <h1>Blog-App</h1>
@@ -60,9 +61,9 @@ const Sidebar = ({Selected , Toactive}) => {
 
         <hr className="line-hr" />
 
-        <div className="manu-div">
+        <div className='manu-div' >
             {tableData.map((tab, index) => (
-               <div key={index} className={`manu-name ${Selected === tab.linkTo ? 'active': ""}`} 
+               <div key={index} className={`manu-name ${Selected === tab.linkTo ? 'active': ""} `} 
                onClick={() => handleClick(tab.linkTo)} >
                {tab.icon}
                <span>{tab.title}</span>
