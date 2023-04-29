@@ -15,45 +15,45 @@ const tableData = [
     index: 0,
     title: "Home",
     linkTo: "home",
-    icon: <Home />
+    icon: <Home />,
   },
   {
     index: 1,
     title: "Table",
     linkTo: "table",
-    icon: <TableChart />
+    icon: <TableChart />,
   },
   {
     index: 2,
     title: "Notifications",
     linkTo: "notifications",
-    icon: <NotificationsActive />
+    icon: <NotificationsActive />,
   },
   {
     index: 3,
     title: "View Mode",
     linkTo: "viewmode",
-    icon: <RemoveRedEye />
+    icon: <RemoveRedEye />,
   },
   {
     index: 4,
     title: "Sing-in",
     linkTo: "singin",
-    icon: <Login />
+    icon: <Login />,
   },
 ];
 
-const Sidebar = ({Selected , Toactive}) => {
+const Sidebar = ({ Selected, Toactive }) => {
   const [toactive, setToactive] = useState(false);
 
   const handleClick = (index) => {
     Toactive(index);
-    setToactive(true)
+    setToactive(true);
   };
 
   return (
     <>
-      <div className={`sidebar1 ${toactive ? 'hide-sidebar' : '' }`}>
+      <div className={`sidebar1 ${toactive ? "hide-sidebar" : ""}`}>
         <div className="Sideberhading">
           <BookOnline />
           <h1>Blog-App</h1>
@@ -61,14 +61,27 @@ const Sidebar = ({Selected , Toactive}) => {
 
         <hr className="line-hr" />
 
-        <div className='manu-div' >
-            {tableData.map((tab, index) => (
-               <div key={index} className={`manu-name ${Selected === tab.linkTo ? 'active': ""} `} 
-               onClick={() => handleClick(tab.linkTo)} >
-               {tab.icon}
-               <span>{tab.title}</span>
-             </div>
-            ))}
+        <div className="manu-div">
+          {tableData.map((tab, index) => (
+            <div
+              key={index}
+              className={`manu-name ${
+                Selected === tab.linkTo ? "active" : ""
+              } `}
+              onClick={() => handleClick(tab.linkTo)}
+            >
+              {tab.icon}
+              <span>{tab.title}</span>
+            </div>
+          ))}
+          <div className="nightMode">
+            <div class="checkbox-wrapper-54">
+              <label class="switch">
+                <input type="checkbox" />
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     </>

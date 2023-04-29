@@ -19,7 +19,6 @@ const Page1 = () => {
     setOpen(!open);
   };
   const hendleactive = (index) =>{
-    console.log("clicked",index);
       setIsselected(index)
   }
   return (

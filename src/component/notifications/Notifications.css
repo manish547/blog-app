@@ -1,0 +1,202 @@
+.noti-div {
+    /* margin-top: 8rem; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f2f5;
+    /* height: 100%; */
+    flex-wrap: wrap;
+}
+
+.notification {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    border: 0px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.75rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0rem 0.25rem 0.375rem -0.0625rem, rgba(0, 0, 0, 0.06) 0rem 0.125rem 0.25rem -0.0625rem;
+    width: 80%;
+    gap: 1rem;
+    padding: 0rem 1rem;
+    padding-bottom: 1rem;
+    margin-top: 9rem;
+}
+
+.Alert-div {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 36rem !important;
+}
+
+.main-div2 {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(255, 255, 255);
+    border: 0px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.75rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0rem 0.25rem 0.375rem -0.0625rem, rgba(0, 0, 0, 0.06) 0rem 0.125rem 0.25rem -0.0625rem;
+    width: 80%;
+    gap: 1rem;
+    padding: 0rem 1rem;
+    padding-bottom: 1rem;
+    margin-top: 3rem;
+}
+
+.headingNotification {}
+
+.mainModal {
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.modalHeading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.modalDone {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    gap: 8px;
+    /* color: #4ea852; */
+}
+
+.modalClose {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    gap: 8px;
+}
+
+.modalClose>span {
+    font-size: 13px;
+    color: #7b809a;
+}
+
+.modalLine {
+    width: 100%;
+}
+.message {
+    width: 100%;
+}
+
+.modalMessage {
+    margin: 1rem;
+}
+
+.h3hading {
+    margin: 0.5rem 0px;
+    margin-top: 2rem;
+    font-size: 1.25rem;
+    line-height: 1.375;
+    font-weight: 700;
+    color: rgb(52, 71, 103);
+}
+
+.spantext {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    letter-spacing: 0.02857em;
+    color: rgb(123, 128, 154);
+}
+
+.btnWithModal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem
+}
+
+.BtnDiv {}
+
+.boxmodal {
+    min-width: 21.875rem !important;
+    padding: 8px;
+    background: rgb(255, 255, 255);
+    color: rgb(52, 71, 103);
+    border-radius: 0.375rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0rem 0.25rem 0.375rem -0.0625rem, rgba(0, 0, 0, 0.06) 0rem 0.125rem 0.25rem -0.0625rem;
+    position: fixed;
+    top: 79%;
+    left: 77%;
+}
+
+/* footer */
+.footer-table1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.table-copyright1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 4rem;
+    font-size: 0.875rem;
+    color: rgb(123, 128, 154);
+    font-weight: 400;
+}
+
+.content1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 4rem;
+    gap: 4rem;
+    font-size: 0.875rem;
+    color: rgb(123, 128, 154);
+    font-weight: 400;
+    flex-wrap: wrap;
+}
+
+.btnMap-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 15rem;
+}
+.MuiAlert-message.css-1pxa9xg-MuiAlert-message {
+    width: 100%;
+}
+
+@media screen and (max-width:640px) {
+    .Alert-div {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 1rem !important;
+    }
+
+    .boxmodal {
+        min-width: 21.875rem !important;
+        padding: 8px;
+        background: rgb(255, 255, 255);
+        color: rgb(52, 71, 103);
+        border-radius: 0.375rem;
+        box-shadow: rgba(0, 0, 0, 0.1) 0rem 0.25rem 0.375rem -0.0625rem, rgba(0, 0, 0, 0.06) 0rem 0.125rem 0.25rem -0.0625rem;
+        position: fixed;
+        top: 69%;
+        left: 3%;
+    }
+
+    .btnMap-div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
