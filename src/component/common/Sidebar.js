@@ -9,6 +9,7 @@ import {
   RemoveRedEye,
   TableChart,
 } from "@mui/icons-material";
+import Singout from "./Singout";
 
 const tableData = [
   {
@@ -37,19 +38,36 @@ const tableData = [
   },
   {
     index: 4,
-    title: "Sing-in",
+    title: "Sing-out",
     linkTo: "singin",
     icon: <Login />,
   },
 ];
 
 const Sidebar = ({ Selected, Toactive }) => {
+  const [toopen, setToopen] = useState(false);
   const [toactive, setToactive] = useState(false);
+  const [todark, setTodark] = useState(false);
 
   const handleClick = (index) => {
     Toactive(index);
     setToactive(true);
+
+    if (index === "singin") {
+      setToopen(true);
+      // localStorage.removeItem("userData")
+      // navigate("/")
+      console.log("singup");
+    }
+    console.log(index);
   };
+
+  const hendletoggle = () => {
+    setTodark(!todark);
+    localStorage.setItem("DarkMode", JSON.stringify(todark))
+
+  };
+ 
 
   return (
     <>
@@ -69,20 +87,29 @@ const Sidebar = ({ Selected, Toactive }) => {
                 Selected === tab.linkTo ? "active" : ""
               } `}
               onClick={() => handleClick(tab.linkTo)}
+              // onClick={() => handleClick(tab)}
             >
               {tab.icon}
               <span>{tab.title}</span>
             </div>
           ))}
           <div className="nightMode">
-            <div class="checkbox-wrapper-54">
-              <label class="switch">
-                <input type="checkbox" />
-                <span class="slider"></span>
-              </label>
+            <div className="checkbox-wrapper-54">
+              <div>
+                <label className="switch">
+                  <input type="checkbox" value={true} onClick={hendletoggle} />
+                  <span className="slider"></span>
+                </label>
+              </div>
+              <div className="dark">
+                <span>{todark ? 'Dark' : 'Light'}</span>
+              </div>
             </div>
           </div>
         </div>
+        {toopen && (
+          <Singout hendleModal={toopen} hendleModalFalse={setToopen} />
+        )}
       </div>
     </>
   );

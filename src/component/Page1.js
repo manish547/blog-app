@@ -5,6 +5,7 @@ import TablePage from "./table/Table";
 import Notifications from "./notifications/Notifications";
 import ViewPage from "./viewmode/ViewPage";
 import Singup from "./singup/Singup";
+import Singout from "./common/Singout";
 
 
 const Page1 = () => {
@@ -41,7 +42,9 @@ const Page1 = () => {
             : isselected === 'table' ? <TablePage Toactive={hendleactive}  /> 
             : isselected === 'notifications' ? <Notifications Toactive={hendleactive} /> 
             : isselected === 'viewmode' ? <ViewPage />
-            : isselected === 'singin' ? <Singup /> 
+            : isselected === 'singin' ? 
+            <Home  /> 
+            // <Singup  /> 
             : ""
           }
         </div>

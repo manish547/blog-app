@@ -9,9 +9,12 @@ const Headerpage = ({ title, handleHomeClick, heandlesearch, value }) => {
     handleHomeClick("home");
   };
   const heandlesearchinput = (e) => {
+  //  hendlesearch1(e.target.value)
     heandlesearch(e.target.value)
     
   };
+ 
+
   return (
     <>
       <div>

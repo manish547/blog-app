@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Headerpage from "../common/Headerpage";
 import { Alert, Box, Button, Modal, Stack, Typography } from "@mui/material";
 import "./Notifications.css";
@@ -67,61 +67,78 @@ const typeArray = [
     index: 0,
     name: "SUCCESS NOTIFICATION",
     color: "linear-gradient(195deg, rgb(102, 187, 106), rgb(67, 160, 71))",
-    fontcolor:"#4ca750",
-    background:"white",
-    
+    fontcolor: "#4ca750",
+    background: "white",
+    type: "success",
   },
   {
     index: 1,
     name: "INFO NOTIFICATION",
     color: "linear-gradient(195deg, rgb(73, 163, 241), rgb(26, 115, 232))",
-    fontcolor:"cyan",
-    background:"linear-gradient(195deg, rgb(73, 163, 241), rgb(26, 115, 232))",
-    type:"info"
+    fontcolor: "cyan",
+    background: "linear-gradient(195deg, rgb(73, 163, 241), rgb(26, 115, 232))",
+    type: "info",
   },
   {
     index: 2,
     name: "WARNING NOTIFICATION",
     color: "linear-gradient(195deg, rgb(255, 167, 38), rgb(251, 140, 0))",
-    fontcolor:"#fd9b15",
-    background:"white",
-    type:"warning"
+    fontcolor: "#fd9b15",
+    background: "white",
+    type: "warning",
   },
   {
     index: 3,
     name: "ERROR NOTIFICATION",
     color: "linear-gradient(195deg, rgb(239, 83, 80), rgb(229, 57, 53))",
-    fontcolor:"#e8413d",
-    background:"white",
-    type:"error"
+    fontcolor: "#e8413d",
+    background: "white",
+    type: "error",
   },
 ];
 
 const Notifications = ({ Toactive }) => {
   const [modalopen, setModalopen] = useState(false);
-  const [selectedModal, setSelectedModal] = useState('black');
-   const [tovalue, setTovalue] = useState(Notification)
-
-   
+  const [selectedModal, setSelectedModal] = useState("black");
+  const [tovalue, setTovalue] = useState(Notification);
+  const [searchvalue, setSearchvalue] = useState("");
+  const [alldata, setAlldata] = useState(typeArray);
 
   // console.log(selectedModal);
   const handleOpen = (selectedType) => {
-    setSelectedModal(selectedType)
-    setModalopen(true)
+    setSelectedModal(selectedType);
+    setModalopen(true);
   };
   const handleClose = () => setModalopen(false);
 
-  // delete Method 
- 
+  // delete Method
+
   const hendledelete = (id) => {
-    const deleteitom = tovalue.filter((item)=> item.index !== id)
-    setTovalue(deleteitom)
+    const deleteitom = tovalue.filter((item) => item.index !== id);
+    setTovalue(deleteitom);
+  };
+
+  useEffect(() => {
+    const hendlefilter =  typeArray.filter((item) =>
+      item.type.toLowerCase().includes(searchvalue.toLowerCase())
+    )
+    console.log(hendlefilter);
+    setAlldata(hendlefilter);
+  }, [searchvalue]);
+
+  const hendlesearchData = (data) => {
+    setSearchvalue(data);
+  };
   
-    
-  }
+
   return (
     <>
-      <Headerpage title="Notification" handleHomeClick={Toactive} />
+      <Headerpage
+        title="Notification"
+        handleHomeClick={Toactive}
+        heandlesearch={hendlesearchData} 
+        value = {searchvalue}
+      />
       <div className="noti-div">
         <div className="notification">
           <h2>Alerts</h2>
@@ -137,7 +154,11 @@ const Notifications = ({ Toactive }) => {
                   }}
                 >
                   <div className="Alert-div">
-                    {item.message} <Close  onClick = {()=>hendledelete(item.index)} sx={{cursor:'pointer'}} />
+                    {item.message}{" "}
+                    <Close
+                      onClick={() => hendledelete(item.index)}
+                      sx={{ cursor: "pointer" }}
+                    />
                   </div>
                 </Alert>
               </Stack>
@@ -154,13 +175,13 @@ const Notifications = ({ Toactive }) => {
           </div>
 
           <div className="btnWithModal">
-            {typeArray.map((item, index) => (
+            {alldata.map((item, index) => (
               <div className="BtnDiv" key={index}>
                 <div className="btnMap-div">
                   <Button
-                    sx={{ background: `${item.color}`, width:'100%' }}
+                    sx={{ background: `${item.color}`, width: "100%" }}
                     variant="contained"
-                    onClick={()=>handleOpen(item)}
+                    onClick={() => handleOpen(item)}
                   >
                     {item.name}
                   </Button>
@@ -169,31 +190,38 @@ const Notifications = ({ Toactive }) => {
             ))}
           </div>
           <Modal keepMounted open={modalopen} onClose={handleClose}>
-                  <div className="boxmodal" style={{background:`${selectedModal.background}`}}>
-                    <Box >
-                      <div className="mainModal">
-                        <div className="modalHeading">
-                          <div className="modalDone">
-                            <Done />
-                            <Typography style={{ color: selectedModal.fontcolor}}  color={`'${selectedModal}'`}>
-                            <h4 >Material Dashboard</h4>
-                            </Typography>
-                          </div>
-                          <div className="modalClose">
-                            <span>11 min ago</span>
-                            <CloseSharp onClick = {() => setModalopen(false)} sx={{cursor:'pointer'}} />
-                          </div>
-                        </div>
-                        <hr className="modalLine" />
-                        <div className="modalMessage">
-                          <span>
-                            Hello, world! This is a notification message
-                          </span>
-                        </div>
-                      </div>
-                    </Box>
+            <div
+              className="boxmodal"
+              style={{ background: `${selectedModal.background}` }}
+            >
+              <Box>
+                <div className="mainModal">
+                  <div className="modalHeading">
+                    <div className="modalDone">
+                      <Done />
+                      <Typography
+                        style={{ color: selectedModal.fontcolor }}
+                        color={`'${selectedModal}'`}
+                      >
+                        <h4>Material Dashboard</h4>
+                      </Typography>
+                    </div>
+                    <div className="modalClose">
+                      <span>11 min ago</span>
+                      <CloseSharp
+                        onClick={() => setModalopen(false)}
+                        sx={{ cursor: "pointer" }}
+                      />
+                    </div>
                   </div>
-                </Modal>
+                  <hr className="modalLine" />
+                  <div className="modalMessage">
+                    <span>Hello, world! This is a notification message</span>
+                  </div>
+                </div>
+              </Box>
+            </div>
+          </Modal>
         </div>
         <div className="footer-table1">
           <div className="table-copyright1">
