@@ -59,16 +59,21 @@ const Home = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const [openModal1, setOpenModal1] = useState(false);
   const [dateupdate, setDateupdate] = useState(dayjs("2023-04-21"));
-  const [hendlDark, setHendlDark] = useState(localStorage.getItem('DarkMode'))
-  
+  const[darkthem, setDarkthem] = useState( false)
  
 
- 
+  console.log(darkthem,"state");
+  /* useEffect for get darkmode value */
+  useEffect(() => {
+    const selectedMode = JSON.parse(localStorage.getItem("DarkMode"));
+    setDarkthem(selectedMode)
+  }, [])
+  
+
 
   const email = localStorage.getItem("userData")
     ? JSON.parse(localStorage.getItem("userData"))
     : "";
-  console.log(email, "mshjs");
   const hendlefilter = (e) => {
     const selectedFilter = e.target.value;
     setFilters(selectedFilter);
@@ -107,7 +112,6 @@ const Home = (props) => {
     }
 
     if (selectedFilter === "all") {
-      console.log("manish");
       setDatefilter(cardData);
     } else {
       setDatefilter(finalData);
@@ -134,12 +138,14 @@ const Home = (props) => {
       openModal1 && <Singout hendleModal ={hendlemoddal} hendleModalFalse = {hendlemodalfalse} />
     }
     
-      <div className="header-div">
+      <div className= {darkthem ? "darkModeHome-header-div" :"header-div" }>
+        {console.log(darkthem, 'getvalue')}
         <MenuOpenOutlined
           className="manuopen-icon"
           onClick={props.sidebarClick}
         />
         <div className="header-item">{email.user}</div>
+        
 
         <div className="header-icon">
           <IconButton size="small">
@@ -169,7 +175,8 @@ const Home = (props) => {
         </div>
       </div>
       <nav>
-        <div className="nav-div">
+        <div className={darkthem ?"darkModeHome":"nav-div"}>
+          {/* {console.log(darkthem, "darkthem")} */}
           <div className="nav-item">
             <h1>Blog</h1>
           </div>
@@ -285,9 +292,9 @@ const Home = (props) => {
         </div>
       </nav>
 
-      <div className="search-div">
-        <div className="search-item">
-          <TextField
+      <div  className={darkthem ? "darkModeHome-search-div" :"search-div" }>
+        <div className="search-item" style={{color: "white"}}>
+          <TextField sx={{color: darkthem ? "white" : "black"}} className={darkthem ? "inputsearch" :"" }
             label="Search post..."
             variant="outlined"
             value={searchf}
@@ -297,9 +304,9 @@ const Home = (props) => {
         </div>
 
         <div className="search-icon">
-          <FormControl sx={{ m: 2, minWidth: 100 }} size="small">
-            <InputLabel>Latest</InputLabel>
-            <Select label="Latest" value={filters} onChange={hendlefilter}>
+          <FormControl sx={{ m: 2, minWidth: 100 }} size="small" className={darkthem ? "input-form" :"" }>
+            <InputLabel>Post</InputLabel>
+            <Select sx={{color: darkthem ? "white" : "black"}} label="Latest" value={filters} onChange={hendlefilter}>
               <MenuItem value={"all"} disabled selected>
                 All
               </MenuItem>
@@ -319,13 +326,12 @@ const Home = (props) => {
       </div>
 
       {/* <Card /> */}
-      <div className="cardmap">
+      <div className= {darkthem ? "darkModeHome-cardmap" :"cardmap" } >
         {datefilter.filter((falitem) =>
           falitem.title.toLowerCase().includes(searchf.toLowerCase())
         ).length === 0 ? (
           <>
             <div className="nodata">No Result Found....</div>
-            {console.log("no data found")}
           </>
         ) : (
           datefilter

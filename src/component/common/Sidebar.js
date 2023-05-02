@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./Sidebar.css";
 import {
@@ -6,7 +6,6 @@ import {
   Home,
   Login,
   NotificationsActive,
-  RemoveRedEye,
   TableChart,
 } from "@mui/icons-material";
 import Singout from "./Singout";
@@ -32,12 +31,6 @@ const tableData = [
   },
   {
     index: 3,
-    title: "View Mode",
-    linkTo: "viewmode",
-    icon: <RemoveRedEye />,
-  },
-  {
-    index: 4,
     title: "Sing-out",
     linkTo: "singin",
     icon: <Login />,
@@ -47,7 +40,15 @@ const tableData = [
 const Sidebar = ({ Selected, Toactive }) => {
   const [toopen, setToopen] = useState(false);
   const [toactive, setToactive] = useState(false);
-  const [todark, setTodark] = useState(false);
+  const [todark, setTodark] = useState(true);
+
+ useEffect(() => {
+  let constData =  JSON.parse(localStorage.getItem("DarkMode"));
+  console.log(constData ,"darkmode",)
+  
+  setTodark(constData)
+ }, [])
+ 
 
   const handleClick = (index) => {
     Toactive(index);
@@ -57,15 +58,13 @@ const Sidebar = ({ Selected, Toactive }) => {
       setToopen(true);
       // localStorage.removeItem("userData")
       // navigate("/")
-      console.log("singup");
     }
-    console.log(index);
   };
+
 
   const hendletoggle = () => {
     setTodark(!todark);
-    localStorage.setItem("DarkMode", JSON.stringify(todark))
-
+    localStorage.setItem("DarkMode", JSON.stringify(!todark))
   };
  
 
@@ -97,12 +96,12 @@ const Sidebar = ({ Selected, Toactive }) => {
             <div className="checkbox-wrapper-54">
               <div>
                 <label className="switch">
-                  <input type="checkbox" value={true} onClick={hendletoggle} />
+                  <input type="checkbox" checked={todark} value={todark} onChange={hendletoggle} id="LightDark"/>
                   <span className="slider"></span>
                 </label>
               </div>
               <div className="dark">
-                <span>{todark ? 'Dark' : 'Light'}</span>
+                <label htmlFor="LightDark" style={{background:'none'}}>{todark ? 'Dark' :'Light' }</label>
               </div>
             </div>
           </div>

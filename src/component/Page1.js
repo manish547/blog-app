@@ -1,11 +1,12 @@
 import Home from "./Home";
 import Sidebar from "./common/Sidebar";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TablePage from "./table/Table";
 import Notifications from "./notifications/Notifications";
-import ViewPage from "./viewmode/ViewPage";
-import Singup from "./singup/Singup";
-import Singout from "./common/Singout";
+
+
+
+
 
 
 const Page1 = () => {
@@ -13,6 +14,19 @@ const Page1 = () => {
 
   const [isselected, setIsselected] = useState('home')
   const [open, setOpen] = useState(true);
+
+
+
+  const[darkthem, setDarkthem] = useState( false)
+ 
+
+  console.log(darkthem,"state");
+  /* useEffect for get darkmode value */
+  useEffect(() => {
+    const selectedMode = JSON.parse(localStorage.getItem("DarkMode"));
+    setDarkthem(selectedMode)
+  }, [])
+
  
   const hendleopen = () => {
     console.log(sideBarRaf.current);
@@ -24,7 +38,7 @@ const Page1 = () => {
   }
   return (
     <>
-      <div className="home-sidebar">
+      <div className={darkthem ? "darkModeHome-home-sidebar" :"home-sidebar" }>
 
         <div className={open ? 'sidebar-div' : 'side-close'}
         // sidebar-div 
@@ -41,7 +55,6 @@ const Page1 = () => {
             isselected === 'home' ? (<Home  sidebarClick = {hendleopen} />) 
             : isselected === 'table' ? <TablePage Toactive={hendleactive}  /> 
             : isselected === 'notifications' ? <Notifications Toactive={hendleactive} /> 
-            : isselected === 'viewmode' ? <ViewPage />
             : isselected === 'singin' ? 
             <Home  /> 
             // <Singup  /> 

@@ -3,9 +3,7 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Protected from "./component/Protected";
 import Singup from "./component/singup/Singup";
-import Errorpage from "./component/errorpage/Errorpage"
-// import Singout from "./component/common/Singout";
-
+import Errorpage from "./component/errorpage/Errorpage";
 
 
 function App() {
@@ -18,10 +16,8 @@ function App() {
           <Route path="*" element={<Errorpage />}></Route>
         </Routes>
       </Router>
-      {/* <Singup />
-    <Page1/> */}
-    {/* <Errorpage /> */}
-    
+
+     
     </>
   );
 }

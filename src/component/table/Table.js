@@ -116,37 +116,47 @@ const ProjectsTable = [
   },
 ];
 
-const TablePage = ({Toactive }) => {
-  const[searchvalue, setSearchvalue] = useState('');
-  const [allData, setallData] = useState(AuthorsTable)
+const TablePage = ({ Toactive }) => {
+  const [searchvalue, setSearchvalue] = useState("");
+  const [allData, setallData] = useState(AuthorsTable);
 
+  const [darkthem, setDarkthem] = useState(false);
+
+  console.log(darkthem, "state");
+  /* useEffect for get darkmode value */
+  useEffect(() => {
+    const selectedMode = JSON.parse(localStorage.getItem("DarkMode"));
+    setDarkthem(selectedMode);
+  }, []);
 
   useEffect(() => {
-  
-    const filteredData = AuthorsTable.filter((index,item)=>(
-      index.name.toLowerCase().includes(searchvalue.toLowerCase()) ||
-      index.Designation.toLowerCase().includes(searchvalue.toLowerCase()) ||
-      index.email.toLowerCase().includes(searchvalue.toLowerCase()) ||
-      index.date.toLowerCase().includes(searchvalue.toLowerCase()) 
-    ))
+    const filteredData = AuthorsTable.filter(
+      (index, item) =>
+        index.name.toLowerCase().includes(searchvalue.toLowerCase()) ||
+        index.Designation.toLowerCase().includes(searchvalue.toLowerCase()) ||
+        index.email.toLowerCase().includes(searchvalue.toLowerCase()) ||
+        index.date.toLowerCase().includes(searchvalue.toLowerCase())
+    );
 
     setallData(filteredData);
-
-
-  }, [searchvalue])
-  
+  }, [searchvalue]);
 
   const heandlesearch = (value) => {
-      setSearchvalue(value)
+    setSearchvalue(value);
   };
 
   return (
     <>
-      <Headerpage title="Table" handleHomeClick={Toactive} heandlesearch ={heandlesearch} value={searchvalue} />
-      <div className="tablemain">
+      <Headerpage
+        title="Table"
+        handleHomeClick={Toactive}
+        heandlesearch={heandlesearch}
+        value={searchvalue}
+      />
+      <div className={darkthem ? "darkModeHome-tablemain" : "tablemain"}>
         <div className="main-table-div">
           <div className="mini-haeder">Authors Table</div>
-          <div className="employ-t">
+          <div className={darkthem ? "darkModeHome-employ-t" : "employ-t"}>
             <TableContainer>
               <Table>
                 <TableHead className="table-heading">
@@ -163,41 +173,49 @@ const TablePage = ({Toactive }) => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {allData.map((rowData, index) => (
-                    <TableRow key={index} className="t-row">
-                      <TableCell>
-                        <div className="table-row">
-                          <div className="imgtable">
-                            {
-                              <img
-                                src={`./image/${rowData.img}`}
-                                alt={`${rowData.name}`}
-                                className="imgtable1"
-                              />
-                            }
-                          </div>
-                          <div className="name-email-t">
-                            <span className="tname">{rowData.name}</span>
-                            <span className="temail">{rowData.email}</span>
-                          </div>
-                        </div>
-                      </TableCell>
-                      <TableCell className="tdesignation">
-                        {rowData.Designation}
-                      </TableCell>
-                      <TableCell className="tstatus">
-                        {rowData.status ? (
-                          <span className="onlineTable">ONLINE</span>
-                        ) : (
-                          <span className="offnlineTable">OFFLINE</span>
-                        )}
-                      </TableCell>
-                      <TableCell className="tdate">{rowData.date}</TableCell>
-                      <TableCell className="tbtn">
-                        {<Button className="teble-btn">Edit</Button>}
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {allData.length > 0 ? (
+                    allData.map((rowData, index) => {
+                      return (
+                        <TableRow key={index} className="t-row">
+                          <TableCell>
+                            <div className="table-row">
+                              <div className="imgtable">
+                                {
+                                  <img
+                                    src={`./image/${rowData.img}`}
+                                    alt={`${rowData.name}`}
+                                    className="imgtable1"
+                                  />
+                                }
+                              </div>
+                              <div className="name-email-t">
+                                <span className="tname">{rowData.name}</span>
+                                <span className="temail">{rowData.email}</span>
+                              </div>
+                            </div>
+                          </TableCell>
+                          <TableCell className="tdesignation">
+                            {rowData.Designation}
+                          </TableCell>
+                          <TableCell className="tstatus">
+                            {rowData.status ? (
+                              <span className="onlineTable">ONLINE</span>
+                            ) : (
+                              <span className="offnlineTable">OFFLINE</span>
+                            )}
+                          </TableCell>
+                          <TableCell className="tdate">
+                            {rowData.date}
+                          </TableCell>
+                          <TableCell className="tbtn">
+                            {<Button className="teble-btn">Edit</Button>}
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })
+                  ) : (
+                    <h1>No Data Found </h1>
+                  )}
                 </TableBody>
               </Table>
             </TableContainer>
@@ -205,7 +223,7 @@ const TablePage = ({Toactive }) => {
         </div>
         <div className="main-table-div-2">
           <div className="mini-haeder">Projects Table</div>
-          <div className="employ-t">
+          <div className={darkthem ? "darkModeHome-employ-t" : "employ-t"}>
             <TableContainer>
               <Table>
                 <TableHead className="table-heading">

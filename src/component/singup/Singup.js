@@ -89,7 +89,6 @@ const Singup = () => {
     if (isVerified.email && isVerified.password && isVerified.user) {
       localStorage.setItem("userData", JSON.stringify(input));
       navigation("/home");
-      console.log(input);
 
       setInput({
         email: "",

@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Chat, Share, Visibility } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 
 const min = 1;
 const max = 4;
 
-
 const Card = ({ image, date, title, shareCount, viewCount, messageCount }) => {
-  const reondmimg = Math.floor(Math.random() * (max - min +1) +min);
-  const[filterlogo]= useState(reondmimg)
+  const reondmimg = Math.floor(Math.random() * (max - min + 1) + min);
+  const [filterlogo] = useState(reondmimg);
+  const[darkthem, setDarkthem] = useState( false)
+ 
+
+  console.log(darkthem,"state");
+  /* useEffect for get darkmode value */
+  useEffect(() => {
+    const selectedMode = JSON.parse(localStorage.getItem("DarkMode"));
+    setDarkthem(selectedMode)
+  }, [])
 
   return (
     <div>
@@ -24,11 +32,16 @@ const Card = ({ image, date, title, shareCount, viewCount, messageCount }) => {
             </div>
             <span className="logo1">
               <div className="shape-div">
-                <img
-                  src="./image/shape-avatar.svg"
-                  alt="avater"
-                  className="shape-avatar"
-                />
+                {darkthem ? (
+                  ""
+                ) : (
+                  <img
+                    src="./image/shape-avatar.svg"
+                    alt="avater"
+                    className="shape-avatar"
+                  />
+                )}
+               
               </div>
 
               <div className="avatarlogo">
@@ -37,7 +50,7 @@ const Card = ({ image, date, title, shareCount, viewCount, messageCount }) => {
             </span>
           </div>
           <div className="content-div">
-            <div className="date-prod">
+            <div className={darkthem ? "darkModeHome-date-prod" : "date-prod"}>
               <span className="Dates">{date ?? ""}</span>
               <span className="prod-name">{title ?? ""}</span>
             </div>

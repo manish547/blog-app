@@ -104,7 +104,15 @@ const Notifications = ({ Toactive }) => {
   const [searchvalue, setSearchvalue] = useState("");
   const [alldata, setAlldata] = useState(typeArray);
 
-  // console.log(selectedModal);
+  const [darkthem, setDarkthem] = useState(false);
+
+  console.log(darkthem, "state");
+  /* useEffect for get darkmode value */
+  useEffect(() => {
+    const selectedMode = JSON.parse(localStorage.getItem("DarkMode"));
+    setDarkthem(selectedMode);
+  }, []);
+
   const handleOpen = (selectedType) => {
     setSelectedModal(selectedType);
     setModalopen(true);
@@ -114,33 +122,39 @@ const Notifications = ({ Toactive }) => {
   // delete Method
 
   const hendledelete = (id) => {
-    const deleteitom = tovalue.filter((item) => item.index !== id);
+    // const deleteitom = tovalue.filter((item) => item.index !== id);
+
+    const deleteitom = tovalue.filter((item) => {
+      if (item.index !== id) {
+        return item;
+      }
+    });
     setTovalue(deleteitom);
   };
 
   useEffect(() => {
-    const hendlefilter =  typeArray.filter((item) =>
+    const hendlefilter = typeArray.filter((item) =>
       item.type.toLowerCase().includes(searchvalue.toLowerCase())
-    )
-    console.log(hendlefilter);
+    );
     setAlldata(hendlefilter);
   }, [searchvalue]);
 
   const hendlesearchData = (data) => {
     setSearchvalue(data);
   };
-  
 
   return (
     <>
       <Headerpage
         title="Notification"
         handleHomeClick={Toactive}
-        heandlesearch={hendlesearchData} 
-        value = {searchvalue}
+        heandlesearch={hendlesearchData}
+        value={searchvalue}
       />
-      <div className="noti-div">
-        <div className="notification">
+      <div className={darkthem ? "darkModeHome-noti-div" : "noti-div"}>
+        <div
+          className={darkthem ? "darkModeHome-notification" : "notification"}
+        >
           <h2>Alerts</h2>
           {tovalue.map((item, index) => (
             <div key={item.index} className="message">
@@ -165,7 +179,7 @@ const Notifications = ({ Toactive }) => {
             </div>
           ))}
         </div>
-        <div className="main-div2">
+        <div className={darkthem ? "darkModeHome-main-div2" : "main-div2"}>
           <div className="headingNotification">
             <h3 className="h3hading">Notifications</h3>
             <span className="spantext">
@@ -175,19 +189,28 @@ const Notifications = ({ Toactive }) => {
           </div>
 
           <div className="btnWithModal">
-            {alldata.map((item, index) => (
-              <div className="BtnDiv" key={index}>
-                <div className="btnMap-div">
-                  <Button
-                    sx={{ background: `${item.color}`, width: "100%" }}
-                    variant="contained"
-                    onClick={() => handleOpen(item)}
-                  >
-                    {item.name}
-                  </Button>
-                </div>
-              </div>
-            ))}
+            {/* {
+               console.log(alldata , "nnnnnnn")
+            } */}
+            {alldata.length > 0 ? (
+              alldata.map((item, index) => {
+                return (
+                  <div className="BtnDiv" key={index}>
+                    <div className="btnMap-div">
+                      <Button
+                        sx={{ background: `${item.color}`, width: "100%" }}
+                        variant="contained"
+                        onClick={() => handleOpen(item)}
+                      >
+                        {item.name}
+                      </Button>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <h3>No Data Found</h3>
+            )}
           </div>
           <Modal keepMounted open={modalopen} onClose={handleClose}>
             <div
@@ -203,7 +226,7 @@ const Notifications = ({ Toactive }) => {
                         style={{ color: selectedModal.fontcolor }}
                         color={`'${selectedModal}'`}
                       >
-                        <h4>Material Dashboard</h4>
+                        <span>Material Dashboard</span>
                       </Typography>
                     </div>
                     <div className="modalClose">

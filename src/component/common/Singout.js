@@ -1,12 +1,25 @@
-import React from 'react'
-// import "./App.css";
+import React, { useEffect, useState } from 'react'
+import "./Singout.css"
 import { Box, Button, Modal, Stack } from '@mui/material';
 import { Delete, Warning } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
 
+
+
+
 const Singout = ({hendleModal, hendleModalFalse}) => {
   const navigate = useNavigate();
+
+  const[darkthem, setDarkthem] = useState( false)
+ 
+
+console.log(darkthem,"state");
+/* useEffect for get darkmode value */
+useEffect(() => {
+  const selectedMode = JSON.parse(localStorage.getItem("DarkMode"));
+  setDarkthem(selectedMode)
+}, [])
 
   const hendleLogout = () => {
     localStorage.removeItem("userData")
@@ -16,8 +29,8 @@ const Singout = ({hendleModal, hendleModalFalse}) => {
     <>
     <div>
     <Modal open={hendleModal} onClose={() => hendleModalFalse(false)}>
-            <Box className="boxModal">
-              <div className="logout-div">
+            <Box className="boxModal" >
+              <div className={darkthem ? "darkModeHome-logout-div" :"logout-div" }>
                 <div className="logoutheading">
                   <h4> Logout Accaount ? </h4>
                 </div>

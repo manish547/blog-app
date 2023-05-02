@@ -1,0 +1,96 @@
+.boxModal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.logout-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: white;
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0px 3px 20px #efebeb;
+    flex-wrap: wrap;
+
+}
+
+.logoutline {
+    border-left: 3px solid #f9703e;
+    height: 100%;
+    position: absolute;
+}
+
+.logoutitem {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    padding: 0rem 1rem;
+}
+
+.headingicon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    color: #f35627;
+    margin-top: 1rem;
+}
+
+.headingicon h3 {
+    color: #8e2316;
+    margin: 0px;
+}
+
+.logoutitem p {
+    color: #f35627;
+}
+
+.logoutwarning {
+    background-color: #fff4e5;
+    position: relative;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.logoutbtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* flex-wrap: wrap; */
+    margin-top: 1rem;
+    gap: 2rem;
+}
+
+.css-1qtu9q6-MuiButtonBase-root-MuiButton-root {
+    border-radius: 20px !important;
+    width: 50%;
+}
+
+.css-kjirbw-MuiButtonBase-root-MuiButton-root {
+    border-radius: 20px !important;
+    width: 50%;
+
+
+}
+
+
+.darkModeHome-logout-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: white;
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0px 3px 20px #efebeb;
+    flex-wrap: wrap;
+    background-color: #3c3535;
+    color: white;
+}
