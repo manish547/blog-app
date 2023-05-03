@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Chat, Share, Visibility } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
+import { ThemeContext } from "../../context/themecontext";
 
 const min = 1;
 const max = 4;
@@ -8,15 +9,14 @@ const max = 4;
 const Card = ({ image, date, title, shareCount, viewCount, messageCount }) => {
   const reondmimg = Math.floor(Math.random() * (max - min + 1) + min);
   const [filterlogo] = useState(reondmimg);
-  const[darkthem, setDarkthem] = useState( false)
- 
+  const[darkthem, setDarkthem] = useState(false)
+  const themeMode = useContext(ThemeContext)
 
-  console.log(darkthem,"state");
-  /* useEffect for get darkmode value */
+  
   useEffect(() => {
-    const selectedMode = JSON.parse(localStorage.getItem("DarkMode"));
-    setDarkthem(selectedMode)
-  }, [])
+   setDarkthem(themeMode.themeMode === "dark"); 
+  }, [themeMode])
+  
 
   return (
     <div>

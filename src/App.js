@@ -4,20 +4,21 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Protected from "./component/Protected";
 import Singup from "./component/singup/Singup";
 import Errorpage from "./component/errorpage/Errorpage";
-
+import { ThemeContext } from "./context/themecontext";
 
 function App() {
+ 
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Singup />}></Route>
-          <Route path="/home" element={<Protected Component={Page1} />} />
-          <Route path="*" element={<Errorpage />}></Route>
-        </Routes>
-      </Router>
-
-     
+      <ThemeContext.Provider value={""} >
+        <Router>
+          <Routes>
+            <Route path="/" element={<Singup />}></Route>
+            <Route path="/home" element={<Protected Component={Page1} />} />
+            <Route path="*" element={<Errorpage />}></Route>
+          </Routes>
+        </Router>
+      </ThemeContext.Provider>
     </>
   );
 }

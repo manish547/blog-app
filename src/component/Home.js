@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, } from "react";
 
 import Card from "./common/Card";
 import { cardData } from "../assets/cardData";
@@ -36,6 +36,7 @@ import {
   Tooltip,
 } from "@mui/material";
 import Singout from "./common/Singout";
+import { ThemeContext } from "../context/themecontext";
 
 const filteritem = [
   {
@@ -59,15 +60,14 @@ const Home = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const [openModal1, setOpenModal1] = useState(false);
   const [dateupdate, setDateupdate] = useState(dayjs("2023-04-21"));
-  const[darkthem, setDarkthem] = useState( false)
- 
+  const [menuOpen, setMenuOpen] = useState(false)
+  const[darkthem, setDarkthem] = useState(false)
+ const themeMode = useContext(ThemeContext)
 
-  console.log(darkthem,"state");
-  /* useEffect for get darkmode value */
+  
   useEffect(() => {
-    const selectedMode = JSON.parse(localStorage.getItem("DarkMode"));
-    setDarkthem(selectedMode)
-  }, [])
+   setDarkthem(themeMode.themeMode === "dark"); 
+  }, [themeMode])
   
 
 
@@ -118,11 +118,6 @@ const Home = (props) => {
     }
   };
 
-  // const hendleLogout = () => {
-  //   localStorage.removeItem("userData");
-  //   //  console.log(localStorage.removeItem('userData'));
-  //   navigate("/");
-  // };
 
   const hendlemoddal = () => {
     openModal1(true)
@@ -131,6 +126,10 @@ const Home = (props) => {
     setOpenModal1(false)
   }
   
+  const Togglebtn = () => {
+    setMenuOpen(!menuOpen)
+    props.sidebarClick()
+  }
 
   return (
     <>
@@ -138,12 +137,15 @@ const Home = (props) => {
       openModal1 && <Singout hendleModal ={hendlemoddal} hendleModalFalse = {hendlemodalfalse} />
     }
     
-      <div className= {darkthem ? "darkModeHome-header-div" :"header-div" }>
-        {console.log(darkthem, 'getvalue')}
-        <MenuOpenOutlined
+      <div className= {darkthem ?  "darkModeHome-header-div" :"header-div" }>
+       {
+        menuOpen ? (<MenuOpenOutlined
           className="manuopen-icon"
-          onClick={props.sidebarClick}
-        />
+          onClick={Togglebtn} 
+         
+        />): (<Close className="manuopen-icon" onClick={Togglebtn} />)
+       } 
+        
         <div className="header-item">{email.user}</div>
         
 
@@ -176,7 +178,7 @@ const Home = (props) => {
       </div>
       <nav>
         <div className={darkthem ?"darkModeHome":"nav-div"}>
-          {/* {console.log(darkthem, "darkthem")} */}
+        
           <div className="nav-item">
             <h1>Blog</h1>
           </div>

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+import { ThemeContext } from "../../context/themecontext";
 
 import "./Sidebar.css";
 import {
@@ -37,23 +38,18 @@ const tableData = [
   },
 ];
 
-const Sidebar = ({ Selected, Toactive }) => {
+const Sidebar = ({ Selected, Toactive,  }) => {
   const [toopen, setToopen] = useState(false);
   const [toactive, setToactive] = useState(false);
-  const [todark, setTodark] = useState(true);
+  const {themeMode, handleOnClick} = useContext(ThemeContext)
 
- useEffect(() => {
-  let constData =  JSON.parse(localStorage.getItem("DarkMode"));
-  console.log(constData ,"darkmode",)
-  
-  setTodark(constData)
- }, [])
- 
+
+
 
   const handleClick = (index) => {
     Toactive(index);
     setToactive(true);
-
+ 
     if (index === "singin") {
       setToopen(true);
       // localStorage.removeItem("userData")
@@ -61,12 +57,6 @@ const Sidebar = ({ Selected, Toactive }) => {
     }
   };
 
-
-  const hendletoggle = () => {
-    setTodark(!todark);
-    localStorage.setItem("DarkMode", JSON.stringify(!todark))
-  };
- 
 
   return (
     <>
@@ -96,12 +86,19 @@ const Sidebar = ({ Selected, Toactive }) => {
             <div className="checkbox-wrapper-54">
               <div>
                 <label className="switch">
-                  <input type="checkbox" checked={todark} value={todark} onChange={hendletoggle} id="LightDark"/>
+                  <input type="checkbox" unchecked={themeMode} value={themeMode} 
+                  onChange={handleOnClick}
+
+                   id="LightDark"/>
                   <span className="slider"></span>
                 </label>
               </div>
               <div className="dark">
-                <label htmlFor="LightDark" style={{background:'none'}}>{todark ? 'Dark' :'Light' }</label>
+                <label htmlFor="LightDark" style={{background:'none', cursor:"pointer"}}>
+                  
+                  {themeMode}
+                 
+                </label>
               </div>
             </div>
           </div>

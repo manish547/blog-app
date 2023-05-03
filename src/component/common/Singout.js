@@ -14,7 +14,7 @@ const Singout = ({hendleModal, hendleModalFalse}) => {
   const[darkthem, setDarkthem] = useState( false)
  
 
-console.log(darkthem,"state");
+
 /* useEffect for get darkmode value */
 useEffect(() => {
   const selectedMode = JSON.parse(localStorage.getItem("DarkMode"));

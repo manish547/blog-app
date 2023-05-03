@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Headerpage from "../common/Headerpage";
 import "./Table.css";
 import {
@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { Copyright, Favorite, MoreVert } from "@mui/icons-material";
 import { useEffect } from "react";
+import { ThemeContext } from "../../context/themecontext";
 
 const AuthorsTable = [
   {
@@ -116,18 +117,23 @@ const ProjectsTable = [
   },
 ];
 
-const TablePage = ({ Toactive }) => {
+const TablePage = ({ Toactive, sidebarClick}) => {
   const [searchvalue, setSearchvalue] = useState("");
   const [allData, setallData] = useState(AuthorsTable);
+ 
+  const[darkthem, setDarkthem] = useState(false)
 
-  const [darkthem, setDarkthem] = useState(false);
 
-  console.log(darkthem, "state");
-  /* useEffect for get darkmode value */
+
+  const themeMode = useContext(ThemeContext)
+
+  
   useEffect(() => {
-    const selectedMode = JSON.parse(localStorage.getItem("DarkMode"));
-    setDarkthem(selectedMode);
-  }, []);
+   setDarkthem(themeMode.themeMode === "dark"); 
+  }, [themeMode])
+
+
+ 
 
   useEffect(() => {
     const filteredData = AuthorsTable.filter(
@@ -145,6 +151,10 @@ const TablePage = ({ Toactive }) => {
     setSearchvalue(value);
   };
 
+
+
+
+
   return (
     <>
       <Headerpage
@@ -152,6 +162,7 @@ const TablePage = ({ Toactive }) => {
         handleHomeClick={Toactive}
         heandlesearch={heandlesearch}
         value={searchvalue}
+        sidebarClickk = {sidebarClick}
       />
       <div className={darkthem ? "darkModeHome-tablemain" : "tablemain"}>
         <div className="main-table-div">

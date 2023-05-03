@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Headerpage from "../common/Headerpage";
 import { Alert, Box, Button, Modal, Stack, Typography } from "@mui/material";
 import "./Notifications.css";
@@ -10,6 +10,7 @@ import {
   Done,
   Favorite,
 } from "@mui/icons-material";
+import { ThemeContext } from "../../context/themecontext";
 
 const Notification = [
   {
@@ -97,21 +98,19 @@ const typeArray = [
   },
 ];
 
-const Notifications = ({ Toactive }) => {
+const Notifications = ({ Toactive, sidebarClick }) => {
   const [modalopen, setModalopen] = useState(false);
   const [selectedModal, setSelectedModal] = useState("black");
   const [tovalue, setTovalue] = useState(Notification);
   const [searchvalue, setSearchvalue] = useState("");
   const [alldata, setAlldata] = useState(typeArray);
+  const[darkthem, setDarkthem] = useState(false)
+  const themeMode = useContext(ThemeContext)
 
-  const [darkthem, setDarkthem] = useState(false);
-
-  console.log(darkthem, "state");
-  /* useEffect for get darkmode value */
+  
   useEffect(() => {
-    const selectedMode = JSON.parse(localStorage.getItem("DarkMode"));
-    setDarkthem(selectedMode);
-  }, []);
+   setDarkthem(themeMode.themeMode === "dark"); 
+  }, [themeMode])
 
   const handleOpen = (selectedType) => {
     setSelectedModal(selectedType);
@@ -128,6 +127,7 @@ const Notifications = ({ Toactive }) => {
       if (item.index !== id) {
         return item;
       }
+      return false
     });
     setTovalue(deleteitom);
   };
@@ -150,6 +150,7 @@ const Notifications = ({ Toactive }) => {
         handleHomeClick={Toactive}
         heandlesearch={hendlesearchData}
         value={searchvalue}
+        sidebarClickk = {sidebarClick}
       />
       <div className={darkthem ? "darkModeHome-noti-div" : "noti-div"}>
         <div
@@ -189,9 +190,7 @@ const Notifications = ({ Toactive }) => {
           </div>
 
           <div className="btnWithModal">
-            {/* {
-               console.log(alldata , "nnnnnnn")
-            } */}
+           
             {alldata.length > 0 ? (
               alldata.map((item, index) => {
                 return (

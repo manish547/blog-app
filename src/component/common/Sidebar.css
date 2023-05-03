@@ -164,3 +164,16 @@
     }
    
 }
+@media screen and (max-width:1600px){
+    .sidebar1{
+        display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    /* width: 100%; */
+    }
+    .hide-sidebar{
+        display: none;
+        visibility: hidden !important;
+    }
+   
+}
