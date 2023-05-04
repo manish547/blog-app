@@ -1,7 +1,10 @@
-import React, { useContext, useEffect, useState, } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { ThemeProvider } from "@emotion/react";
 
 import Card from "./common/Card";
 import { cardData } from "../assets/cardData";
+import Singout from "./common/Singout";
+import { ThemeContext } from "../context/themecontext";
 
 import {
   Add,
@@ -10,17 +13,8 @@ import {
   MenuOpenOutlined,
   NotificationAddOutlined,
 } from "@mui/icons-material";
-
 import SearchIcon from "@mui/icons-material/Search";
 import { deepOrange } from "@mui/material/colors";
-import dayjs from "dayjs";
-
-import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-
-import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
-
 import {
   Avatar,
   Badge,
@@ -34,9 +28,15 @@ import {
   Select,
   TextField,
   Tooltip,
+  createTheme,
 } from "@mui/material";
-import Singout from "./common/Singout";
-import { ThemeContext } from "../context/themecontext";
+
+import dayjs from "dayjs";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
+
 
 const filteritem = [
   {
@@ -60,16 +60,13 @@ const Home = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const [openModal1, setOpenModal1] = useState(false);
   const [dateupdate, setDateupdate] = useState(dayjs("2023-04-21"));
-  const [menuOpen, setMenuOpen] = useState(false)
-  const[darkthem, setDarkthem] = useState(false)
- const themeMode = useContext(ThemeContext)
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [darkthem, setDarkthem] = useState(false);
+  const themeMode = useContext(ThemeContext);
 
-  
   useEffect(() => {
-   setDarkthem(themeMode.themeMode === "dark"); 
-  }, [themeMode])
-  
-
+    setDarkthem(themeMode.themeMode === "dark");
+  }, [themeMode]);
 
   const email = localStorage.getItem("userData")
     ? JSON.parse(localStorage.getItem("userData"))
@@ -118,36 +115,41 @@ const Home = (props) => {
     }
   };
 
-
   const hendlemoddal = () => {
-    openModal1(true)
-  }
+    openModal1(true);
+  };
   const hendlemodalfalse = () => {
-    setOpenModal1(false)
-  }
-  
+    setOpenModal1(false);
+  };
+
   const Togglebtn = () => {
-    setMenuOpen(!menuOpen)
-    props.sidebarClick()
-  }
+    setMenuOpen(!menuOpen);
+    props.sidebarClick();
+  };
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
 
   return (
     <>
-    {
-      openModal1 && <Singout hendleModal ={hendlemoddal} hendleModalFalse = {hendlemodalfalse} />
-    }
-    
-      <div className= {darkthem ?  "darkModeHome-header-div" :"header-div" }>
-       {
-        menuOpen ? (<MenuOpenOutlined
-          className="manuopen-icon"
-          onClick={Togglebtn} 
-         
-        />): (<Close className="manuopen-icon" onClick={Togglebtn} />)
-       } 
-        
+      {openModal1 && (
+        <Singout
+          hendleModal={hendlemoddal}
+          hendleModalFalse={hendlemodalfalse}
+        />
+      )}
+
+      <div className={darkthem ? "darkModeHome-header-div" : "header-div"}>
+        {menuOpen ? (
+          <MenuOpenOutlined className="manuopen-icon" onClick={Togglebtn} />
+        ) : (
+          <Close className="manuopen-icon" onClick={Togglebtn} />
+        )}
+
         <div className="header-item">{email.user}</div>
-        
 
         <div className="header-icon">
           <IconButton size="small">
@@ -158,7 +160,7 @@ const Home = (props) => {
           </IconButton>
           <IconButton>
             <Badge badgeContent={2} color="warning">
-              <NotificationAddOutlined />
+              <NotificationAddOutlined sx={{color:`${darkthem ? "white" : "black"}`}}/>
             </Badge>
           </IconButton>
 
@@ -173,19 +175,17 @@ const Home = (props) => {
               </Avatar>
             </IconButton>
           </Tooltip>
-          
         </div>
       </div>
       <nav>
-        <div className={darkthem ?"darkModeHome":"nav-div"}>
-        
+        <div className={darkthem ? "darkModeHome" : "nav-div"}>
           <div className="nav-item">
             <h1>Blog</h1>
           </div>
 
           <div className="nav-icon">
             <Button
-              onClick={() => setOpenModal(true)}
+              // onClick={() => setOpenModal(true)}
               variant="contained"
               startIcon={<Add />}
             >
@@ -225,9 +225,6 @@ const Home = (props) => {
                       </div>
 
                       <div className="post-name">
-                        {/* <label className="inputlabel" htmlFor="postname">
-                        Post Name
-                      </label> */}
                         <input
                           type="text"
                           placeholder="Manish "
@@ -237,9 +234,6 @@ const Home = (props) => {
                       </div>
 
                       <div className="postdiscription">
-                        {/* <label className="inputlabel2" htmlFor="textarea">
-                       Post Discription
-                      </label> */}
                         <textarea
                           className="inputpost2"
                           type="text"
@@ -251,9 +245,6 @@ const Home = (props) => {
                       <div className="datepicker">
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <DemoContainer components={["MobileDatePicker"]}>
-                            {/* className="datePicker1"
-                               className="datePicker1"
-                               className="datePicker1" */}
                             <DemoItem label="Post Date">
                               <MobileDatePicker
                                 sx={{
@@ -294,21 +285,51 @@ const Home = (props) => {
         </div>
       </nav>
 
-      <div  className={darkthem ? "darkModeHome-search-div" :"search-div" }>
-        <div className="search-item" style={{color: "white"}}>
-          <TextField sx={{color: darkthem ? "white" : "black"}} className={darkthem ? "inputsearch" :"" }
-            label="Search post..."
-            variant="outlined"
-            value={searchf}
-            onChange={(e) => setSearchf(e.target.value)}
-          />
+      <div className={darkthem ? "darkModeHome-search-div" : "search-div"}>
+      
+      {
+        darkthem ?  <div className="search-item" style={{ color: "white" }}>
+          <ThemeProvider theme= {darkTheme} >
+            <TextField
+              className={darkthem ? "inputsearch" : ""}
+              label="Search post..."
+              variant="outlined"
+              color="primary"
+              value={searchf}
+              onChange={(e) => setSearchf(e.target.value)}
+            />
+          </ThemeProvider>
+          <SearchIcon className="searchbar" />
+        </div> : <div className="search-item" style={{ color: "white" }}>
+         
+            <TextField
+              sx={{ color: darkthem ? "white" : "black" }}
+              className={darkthem ? "inputsearch" : ""}
+              label="Search post..."
+              variant="outlined"
+              value={searchf}
+              onChange={(e) => setSearchf(e.target.value)}
+            />
+         
           <SearchIcon className="searchbar" />
         </div>
+      }
+
+        
 
         <div className="search-icon">
-          <FormControl sx={{ m: 2, minWidth: 100 }} size="small" className={darkthem ? "input-form" :"" }>
+          <FormControl
+            sx={{ m: 2, minWidth: 100 }}
+            size="small"
+            className={darkthem ? "input-form" : ""}
+          >
             <InputLabel>Post</InputLabel>
-            <Select sx={{color: darkthem ? "white" : "black"}} label="Latest" value={filters} onChange={hendlefilter}>
+            <Select
+              sx={{ color: darkthem ? "white" : "black" }}
+              label="Latest"
+              value={filters}
+              onChange={hendlefilter}
+            >
               <MenuItem value={"all"} disabled selected>
                 All
               </MenuItem>
@@ -319,16 +340,13 @@ const Home = (props) => {
                   </MenuItem>
                 );
               })}
-              {/* <MenuItem>Latest</MenuItem>
-              <MenuItem>Popular</MenuItem>
-              <MenuItem>Oldest</MenuItem> */}
             </Select>
           </FormControl>
         </div>
       </div>
 
       {/* <Card /> */}
-      <div className= {darkthem ? "darkModeHome-cardmap" :"cardmap" } >
+      <div className={darkthem ? "darkModeHome-cardmap" : "cardmap"}>
         {datefilter.filter((falitem) =>
           falitem.title.toLowerCase().includes(searchf.toLowerCase())
         ).length === 0 ? (

@@ -4,7 +4,6 @@
     align-items: center;
     flex-wrap: wrap;
     position: fixed;
-    /* top: 20px; */
     z-index: 1100;
     background-color: rgba(249, 250, 251, 0.8);
     padding: 1rem;
@@ -56,7 +55,7 @@
   }
 
 
-  @media screen and (max-width:1600px) {
+  @media screen and (max-width:1600px) and (min-width: 640px) {
     .header-div {
         width: 100%;
       }

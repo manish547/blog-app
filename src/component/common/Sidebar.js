@@ -1,15 +1,16 @@
 import React, { useContext, useState } from "react";
 import { ThemeContext } from "../../context/themecontext";
 
-import "./Sidebar.css";
-import {
-  BookOnline,
-  Home,
-  Login,
-  NotificationsActive,
-  TableChart,
-} from "@mui/icons-material";
 import Singout from "./Singout";
+import "./Sidebar.css";
+
+import {
+BookOnline,
+Home,
+Login,
+NotificationsActive,
+TableChart,
+} from "@mui/icons-material";
 
 const tableData = [
   {
@@ -38,25 +39,23 @@ const tableData = [
   },
 ];
 
-const Sidebar = ({ Selected, Toactive,  }) => {
+const Sidebar = ({ Selected, Toactive }) => {
   const [toopen, setToopen] = useState(false);
   const [toactive, setToactive] = useState(false);
-  const {themeMode, handleOnClick} = useContext(ThemeContext)
-
-
-
+  const { themeMode, handleOnClick } = useContext(ThemeContext);
 
   const handleClick = (index) => {
     Toactive(index);
     setToactive(true);
- 
+
     if (index === "singin") {
       setToopen(true);
-      // localStorage.removeItem("userData")
-      // navigate("/")
     }
   };
 
+  const goTohomepage = () => {
+    return (setToactive(true))
+  };
 
   return (
     <>
@@ -76,7 +75,6 @@ const Sidebar = ({ Selected, Toactive,  }) => {
                 Selected === tab.linkTo ? "active" : ""
               } `}
               onClick={() => handleClick(tab.linkTo)}
-              // onClick={() => handleClick(tab)}
             >
               {tab.icon}
               <span>{tab.title}</span>
@@ -85,19 +83,23 @@ const Sidebar = ({ Selected, Toactive,  }) => {
           <div className="nightMode">
             <div className="checkbox-wrapper-54">
               <div>
-                <label className="switch">
-                  <input type="checkbox" unchecked={themeMode} value={themeMode} 
-                  onChange={handleOnClick}
-
-                   id="LightDark"/>
+                <label className="switch" >
+                  <input onClick={goTohomepage}
+                    type="checkbox"
+                    unchecked={themeMode}
+                    value={themeMode}
+                    onChange={handleOnClick}
+                    id="LightDark"
+                  />
                   <span className="slider"></span>
                 </label>
               </div>
               <div className="dark">
-                <label htmlFor="LightDark" style={{background:'none', cursor:"pointer"}}>
-                  
+                <label
+                  htmlFor="LightDark"
+                  style={{ background: "none", cursor: "pointer" }}
+                >
                   {themeMode}
-                 
                 </label>
               </div>
             </div>

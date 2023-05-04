@@ -1,22 +1,17 @@
+import React, { useEffect, useRef, useState } from "react";
+
 import Home from "./Home";
 import Sidebar from "./common/Sidebar";
-import React, {  useEffect, useRef, useState } from "react";
 import TablePage from "./table/Table";
 import Notifications from "./notifications/Notifications";
 import { ThemeContext, themes } from "../context/themecontext";
 
-
 const Page1 = () => {
   const sideBarRaf = useRef();
-
   const [isselected, setIsselected] = useState("home");
   const [open, setOpen] = useState(true);
-  
   const [themeMode, setThemeMode] = useState(themes.light);
-
   const [darkthem, setDarkthem] = useState();
-
-
 
   // const {themeMode} = useContext(ThemeContext);
 
@@ -32,28 +27,22 @@ const Page1 = () => {
       : setThemeMode(themes.light);
   }
 
-  // /* useEffect for get darkmode value */
-  // useEffect(() => {
-  //   const selectedMode = JSON.parse(localStorage.getItem("DarkMode"));
-  //   setDarkthem(selectedMode)
-  // }, [])
-
   const hendleopen = () => {
-    open ? sideBarRaf.current.style.display = "none" : sideBarRaf.current.style.display = "block"
+    open
+      ? (sideBarRaf.current.style.display = "none")
+      : (sideBarRaf.current.style.display = "block");
     setOpen(!open);
   };
   const hendleactive = (index) => {
     setIsselected(index);
   };
-  
-  
+
   return (
     <>
       <ThemeContext.Provider value={{ themeMode, handleOnClick }}>
         <div
           className={darkthem ? "darkModeHome-home-sidebar" : "home-sidebar"}
         >
-
           <div
             className={open ? "sidebar-div" : "side-close"}
             // sidebar-div
@@ -63,7 +52,6 @@ const Page1 = () => {
               <Sidebar
                 Selected={isselected}
                 Toactive={hendleactive}
-                // themeMode={themeMode}
               />
             ) : (
               ""
@@ -72,15 +60,17 @@ const Page1 = () => {
 
           {/* pages */}
           <div className="home-page-div">
-            {/* <Home  sidebarClick = {hendleopen} /> */}
             {isselected === "home" ? (
               <Home sidebarClick={hendleopen} />
             ) : isselected === "table" ? (
-              <TablePage Toactive={hendleactive} sidebarClick={hendleopen}  />
+              <TablePage Toactive={hendleactive} sidebarClick={hendleopen} />
             ) : isselected === "notifications" ? (
-              <Notifications Toactive={hendleactive} sidebarClick={hendleopen} />
+              <Notifications
+                Toactive={hendleactive}
+                sidebarClick={hendleopen}
+              />
             ) : isselected === "singin" ? (
-              <Home />
+              <Home sidebarClick={hendleopen} />
             ) : (
               // <Singup  />
               ""

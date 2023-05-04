@@ -1,6 +1,10 @@
 import React, { useContext, useState } from "react";
+import { useEffect } from "react";
+
+import { ThemeContext } from "../../context/themecontext";
 import Headerpage from "../common/Headerpage";
 import "./Table.css";
+
 import {
   Button,
   IconButton,
@@ -12,8 +16,6 @@ import {
   TableRow,
 } from "@mui/material";
 import { Copyright, Favorite, MoreVert } from "@mui/icons-material";
-import { useEffect } from "react";
-import { ThemeContext } from "../../context/themecontext";
 
 const AuthorsTable = [
   {
@@ -117,23 +119,15 @@ const ProjectsTable = [
   },
 ];
 
-const TablePage = ({ Toactive, sidebarClick}) => {
+const TablePage = ({ Toactive, sidebarClick }) => {
   const [searchvalue, setSearchvalue] = useState("");
   const [allData, setallData] = useState(AuthorsTable);
- 
-  const[darkthem, setDarkthem] = useState(false)
+  const [darkthem, setDarkthem] = useState(false);
+  const themeMode = useContext(ThemeContext);
 
-
-
-  const themeMode = useContext(ThemeContext)
-
-  
   useEffect(() => {
-   setDarkthem(themeMode.themeMode === "dark"); 
-  }, [themeMode])
-
-
- 
+    setDarkthem(themeMode.themeMode === "dark");
+  }, [themeMode]);
 
   useEffect(() => {
     const filteredData = AuthorsTable.filter(
@@ -151,10 +145,6 @@ const TablePage = ({ Toactive, sidebarClick}) => {
     setSearchvalue(value);
   };
 
-
-
-
-
   return (
     <>
       <Headerpage
@@ -162,7 +152,7 @@ const TablePage = ({ Toactive, sidebarClick}) => {
         handleHomeClick={Toactive}
         heandlesearch={heandlesearch}
         value={searchvalue}
-        sidebarClickk = {sidebarClick}
+        sidebarClickk={sidebarClick}
       />
       <div className={darkthem ? "darkModeHome-tablemain" : "tablemain"}>
         <div className="main-table-div">

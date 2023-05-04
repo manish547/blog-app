@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
+
 import Headerpage from "../common/Headerpage";
-import { Alert, Box, Button, Modal, Stack, Typography } from "@mui/material";
 import "./Notifications.css";
-// import "../table/Table.css";
+import { ThemeContext } from "../../context/themecontext";
+
+import { Alert, Box, Button, Modal, Stack, Typography } from "@mui/material";
 import {
   Close,
   CloseSharp,
@@ -10,7 +12,6 @@ import {
   Done,
   Favorite,
 } from "@mui/icons-material";
-import { ThemeContext } from "../../context/themecontext";
 
 const Notification = [
   {
@@ -104,13 +105,12 @@ const Notifications = ({ Toactive, sidebarClick }) => {
   const [tovalue, setTovalue] = useState(Notification);
   const [searchvalue, setSearchvalue] = useState("");
   const [alldata, setAlldata] = useState(typeArray);
-  const[darkthem, setDarkthem] = useState(false)
-  const themeMode = useContext(ThemeContext)
+  const [darkthem, setDarkthem] = useState(false);
+  const themeMode = useContext(ThemeContext);
 
-  
   useEffect(() => {
-   setDarkthem(themeMode.themeMode === "dark"); 
-  }, [themeMode])
+    setDarkthem(themeMode.themeMode === "dark");
+  }, [themeMode]);
 
   const handleOpen = (selectedType) => {
     setSelectedModal(selectedType);
@@ -121,13 +121,12 @@ const Notifications = ({ Toactive, sidebarClick }) => {
   // delete Method
 
   const hendledelete = (id) => {
-    // const deleteitom = tovalue.filter((item) => item.index !== id);
 
     const deleteitom = tovalue.filter((item) => {
       if (item.index !== id) {
         return item;
       }
-      return false
+      return false;
     });
     setTovalue(deleteitom);
   };
@@ -150,35 +149,40 @@ const Notifications = ({ Toactive, sidebarClick }) => {
         handleHomeClick={Toactive}
         heandlesearch={hendlesearchData}
         value={searchvalue}
-        sidebarClickk = {sidebarClick}
+        sidebarClickk={sidebarClick}
       />
       <div className={darkthem ? "darkModeHome-noti-div" : "noti-div"}>
         <div
           className={darkthem ? "darkModeHome-notification" : "notification"}
         >
           <h2>Alerts</h2>
-          {tovalue.map((item, index) => (
-            <div key={item.index} className="message">
-              <Stack sx={{ width: "100%" }} spacing={2}>
-                <Alert
-                  icon={false}
-                  sx={{
-                    background: `${item.colors}`,
-                    color: "white",
-                    borderRadius: "6px",
-                  }}
-                >
-                  <div className="Alert-div">
-                    {item.message}{" "}
-                    <Close
-                      onClick={() => hendledelete(item.index)}
-                      sx={{ cursor: "pointer" }}
-                    />
-                  </div>
-                </Alert>
-              </Stack>
-            </div>
-          ))}
+
+          {tovalue.length > 0 ? (
+            tovalue.map((item, index) => (
+              <div key={item.index} className="message">
+                <Stack sx={{ width: "100%" }} spacing={2}>
+                  <Alert
+                    icon={false}
+                    sx={{
+                      background: `${item.colors}`,
+                      color: "white",
+                      borderRadius: "6px",
+                    }}
+                  >
+                    <div className="Alert-div">
+                      {item.message}{" "}
+                      <Close
+                        onClick={() => hendledelete(item.index)}
+                        sx={{ cursor: "pointer" }}
+                      />
+                    </div>
+                  </Alert>
+                </Stack>
+              </div>
+            ))
+          ) : (
+            <h3>No Message Found</h3>
+          )}
         </div>
         <div className={darkthem ? "darkModeHome-main-div2" : "main-div2"}>
           <div className="headingNotification">
@@ -190,7 +194,6 @@ const Notifications = ({ Toactive, sidebarClick }) => {
           </div>
 
           <div className="btnWithModal">
-           
             {alldata.length > 0 ? (
               alldata.map((item, index) => {
                 return (

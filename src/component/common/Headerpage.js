@@ -16,6 +16,7 @@ const Headerpage = ({
   heandlesearch,
   value,
   sidebarClickk,
+  
 }) => {
   const [menuOpen, setMenuOpen] = useState(true)
 
@@ -23,13 +24,13 @@ const Headerpage = ({
     handleHomeClick("home");
   };
   const heandlesearchinput = (e) => {
-    //  hendlesearch1(e.target.value)
     heandlesearch(e.target.value);
   };
   const Togglebtn = () => {
     setMenuOpen(!menuOpen);
     sidebarClickk();
   };
+
   return (
     <>
       <div>

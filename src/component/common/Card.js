@@ -19,7 +19,7 @@ const Card = ({ image, date, title, shareCount, viewCount, messageCount }) => {
   
 
   return (
-    <div>
+    <div className="main-div-div">
       <div className="main-div">
         <div className="card">
           <div className="img-div">

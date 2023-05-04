@@ -79,12 +79,14 @@
     text-transform: capitalize;
     font-weight: bolder;
     font-size: 0.875rem;
+    color: #7b809a;
 }
 
 .temail {
     font-size: 0.75rem;
     line-height: 1.25;
     letter-spacing: 0.03333em;
+    color: #7b809a;
 }
 
 .tdesignation {
@@ -207,10 +209,6 @@
     justify-content: flex-start;
     gap: 4px;
 }
-
-/* .t-row{
-
-} */
 
 @media screen and (max-width:640px) {
     .main-table-div {

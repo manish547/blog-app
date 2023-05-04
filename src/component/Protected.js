@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import Singup from "./singup/Singup";
 import { useState } from "react";
 
@@ -8,18 +9,17 @@ const Protected = (props) => {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(false);
 
-  
   useEffect(() => {
     let Singup = localStorage.getItem("userData")
       ? JSON.parse(localStorage.getItem("userData"))
       : "";
     if (!Singup) {
-      setLoggedIn(false)
+      setLoggedIn(false);
       navigate("/");
-    }else{
-      setLoggedIn(true)
+    } else {
+      setLoggedIn(true);
     }
-  },[navigate]);
+  }, [navigate]);
 
   return <div>{loggedIn ? <Component /> : <Singup />}</div>;
 };

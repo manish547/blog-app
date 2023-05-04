@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+
 import "./Singout.css"
+import { ThemeContext } from '../../context/themecontext';
+
 import { Box, Button, Modal, Stack } from '@mui/material';
 import { Delete, Warning } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
@@ -11,17 +14,18 @@ import { useNavigate } from 'react-router-dom';
 const Singout = ({hendleModal, hendleModalFalse}) => {
   const navigate = useNavigate();
 
-  const[darkthem, setDarkthem] = useState( false)
+  const[darkthem, setDarkthem] = useState(false)
+  const themeMode = useContext(ThemeContext)
  
+   
+   useEffect(() => {
+    setDarkthem(themeMode.themeMode === "dark"); 
+   }, [themeMode])
 
-
-/* useEffect for get darkmode value */
-useEffect(() => {
-  const selectedMode = JSON.parse(localStorage.getItem("DarkMode"));
-  setDarkthem(selectedMode)
-}, [])
-
-  const hendleLogout = () => {
+  
+  
+  
+   const hendleLogout = () => {
     localStorage.removeItem("userData")
        navigate("/")
   }
@@ -65,10 +69,9 @@ useEffect(() => {
                   <Button
                     variant="contained"
                     color="warning"
-                    // onClick={hendleModalFalse}
                     onClick={hendleLogout}
                   >
-                    Logout. <Delete />
+                    Logout <Delete />
                   </Button>
                 </div>
               </div>
